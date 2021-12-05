@@ -1,0 +1,31 @@
+.threeColumns {
+  padding: 46px 163px 86px;
+  justify-content: space-between;
+  background-color: $color-yellow;
+  font-family: $font-base;
+
+  .box {
+    width: 334px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &_value {
+      font-size: 90px;
+      line-height: 122px;
+    }
+    &_objective {
+      font-size: 18px;
+      line-height: 30px;
+      text-transform: uppercase;
+    }
+    &_description {
+      margin-top: 28px;
+      font-size: 16px;
+      line-height: 18px;
+      font-family: $font-alt;
+      letter-spacing: -0.32px;
+      text-align: center;
+    }
+  }
+}
