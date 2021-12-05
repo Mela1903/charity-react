@@ -1,0 +1,16 @@
+.btn {
+  width: 310px;
+  height: 120px;
+  border: 0.75px solid $color-grey;
+  background-color: inherit;
+  opacity: 1;
+
+  &__upper {
+    text-transform: uppercase;
+    color: $color-dark-grey;
+    font-size: 36px;
+    line-height: 45px;
+    font-weight: 300;
+    font-family: $font-base;
+  }
+}
