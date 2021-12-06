@@ -6,17 +6,17 @@ const HomeThreeColumns = () => {
             <div className='box'>
                 <div className='box_value'>10</div>
                 <div className='box_objective'>oddanych worków</div>
-                <div className='box_description'>Lorem ipsum dolor sit amet, consectetur adipisc Pellentesque vel enim a elit viverra elementuma. Aliquam erat volutpat.</div>
+                <p className='box_description'>Lorem ipsum dolor sit amet, consectetur adipisc Pellentesque vel enim a elit viverra elementuma. Aliquam erat volutpat.</p>
             </div>
             <div className='box'>
                 <div className='box_value'>5</div>
                 <div className='box_objective'>wspartych organizacji</div>
-                <div className='box_description'>Lorem ipsum dolor sit amet, consectetur adipisc Pellentesque vel enim a elit viverra elementuma. Aliquam erat volutpat.</div>
+                <p className='box_description'>Lorem ipsum dolor sit amet, consectetur adipisc Pellentesque vel enim a elit viverra elementuma. Aliquam erat volutpat.</p>
             </div>
             <div className='box'>
                 <div className='box_value'>7</div>
                 <div className='box_objective'>zorganizowanych zbiórek</div>
-                <div className='box_description'>Lorem ipsum dolor sit amet, consectetur adipisc Pellentesque vel enim a elit viverra elementuma. Aliquam erat volutpat.</div>
+                <p className='box_description'>Lorem ipsum dolor sit amet, consectetur adipisc Pellentesque vel enim a elit viverra elementuma. Aliquam erat volutpat.</p>
             </div>
         </div>
     );

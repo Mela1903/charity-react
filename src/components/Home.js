@@ -1,14 +1,14 @@
 import React from 'react';
 import HomeHeader from "./HomeHeader";
 import HomeThreeColumns from "./HomeThreeColumns";
-import HomeEasySteps from "./HomeEasySteps";
+import HomeSteps from "./HomeSteps";
 
 const Home = () => {
     return (
         <>
             <HomeHeader />
             <HomeThreeColumns />
-            <HomeEasySteps />
+            <HomeSteps />
         </>
     );
 };
