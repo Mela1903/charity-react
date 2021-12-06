@@ -1,3 +1,17 @@
 body {
   font-family: $font-base;
 }
+
+h2 {
+  margin: 0 0 25px;
+}
+
+p, h3 {
+  margin: 0;
+}
+
+hr {
+  color: $color-line;
+  width: 70px;
+  margin: 10px auto;
+}

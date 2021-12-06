@@ -1,8 +1,9 @@
 .threeColumns {
   padding: 46px 163px 86px;
   justify-content: space-between;
-  background-color: $color-yellow;
+  background-image: url("../../assets/Three-Columns-Background.png");
   font-family: $font-base;
+  color: $color-green;
 
   .box {
     width: 334px;
