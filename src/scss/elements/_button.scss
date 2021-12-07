@@ -38,4 +38,10 @@
       border: 0.75px solid $color-grey;
     }
   }
+
+  &__logout {
+    width: 150px;
+    height: 50px;
+    margin-top: 35px;
+  }
 }
