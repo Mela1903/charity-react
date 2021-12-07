@@ -1,4 +1,5 @@
 import React from 'react';
+import HomeNavigation from "./HomeNavigation";
 
 const HomeHeader = () => {
     return (
@@ -6,19 +7,7 @@ const HomeHeader = () => {
 
             <div className='home__backgroundImage'></div>
             <div className='home__open'>
-                <nav>
-                    <ul className="page-nav-actions">
-                        <li><a href="#" className="nav__link">Zaloguj</a></li>
-                        <li><a href="#" className="nav__link">Załóż konto</a></li>
-                    </ul>
-                    <ul className="page-nav-list">
-                        <li><a href="#" className="nav__link">Start</a></li>
-                        <li><a href="#" className="nav__link">O co chodzi?</a></li>
-                        <li><a href="#" className="nav__link">O nas</a></li>
-                        <li><a href="#" className="nav__link">Fundacja i organizacje</a></li>
-                        <li><a href="#" className="nav__link">Kontakt</a></li>
-                    </ul>
-                </nav>
+                <HomeNavigation />
                 <div className='home__text'>
                     <h1 className='headers_text'>
                         Zacznij pomagać!<br/>
