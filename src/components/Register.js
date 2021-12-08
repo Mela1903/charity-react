@@ -23,6 +23,7 @@ const Register = () => {
             setError('')
             setLoading(true)
             await register(emailRef.current.value, passwordRef.current.value)
+            navigate('/')
         } catch {
             setError('Nie udało się utworzyć konta')
         }

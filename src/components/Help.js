@@ -1,45 +1,69 @@
 import React, {useEffect, useState} from 'react';
 import {db} from "../firebase";
-import {collection, getDocs} from 'firebase/firestore'
+import {collection, getDocs, query, where} from 'firebase/firestore'
+import Organisations from "./Organisations";
+import Pagination from "./Pagination";
 
 const Help = () => {
     const [organisations, setOrganisations] = useState([]);
-    const organisationsCollectionRef = collection(db, 'organisations')
+    const organisationsCollectionRef = collection(db, 'organisations');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [organisationsPerPage, setOrganisationsPerPage] = useState(3);
+    const [current, setCurrent] = useState("foundations")
+    const [orgList, setOrgList] = useState([])
 
     useEffect(() => {
         const getOrganisations = async () => {
             const data = await getDocs(organisationsCollectionRef);
             setOrganisations(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-            console.log(data.docs)
         };
-
         getOrganisations();
     }, [])
 
+    const handleCurrent = name => () => {
+        setCurrent(name)
+    }
+
+    useEffect(async () => {
+        const organisationsList = query(organisationsCollectionRef, where("category", "==", "organisations"))
+        const foundationsList = query(organisationsCollectionRef, where("category", "==", "foundations"))
+        const localsList = query(organisationsCollectionRef, where("category", "==", "locals"))
+        const organisationsQuery = await getDocs(organisationsList);
+        orgList.push(organisationsQuery)
+        orgList.push(localsList)
+        orgList.push(foundationsList)
+    }, [current])
+
+    const indexOfLastOrganisation = currentPage * organisationsPerPage;
+    const indexOfFirstOrganisation = indexOfLastOrganisation - organisationsPerPage;
+    const currentOrganisations = orgList.slice(indexOfFirstOrganisation, indexOfLastOrganisation);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
-        <div className='flex help'>
+        <div className='flex help' id='help'>
             <div>
                 <h2 className='headers_text'>Komu pomagamy?</h2>
                 <img src={require('../assets/Decoration.svg').default} alt='Decoration'/>
                 <div className='help__who'>
-                    <button className='btn btn__help'>Fundacjom</button>
-                    <button className='btn btn__help'>Organizacjom pozarządowym</button>
-                    <button className='btn btn__help'>Lokalnym zbiórkom</button>
+                    <button onClick={handleCurrent("foundations")} className='btn btn__help'>Fundacjom</button>
+                    <button onClick={handleCurrent("organisations")} className='btn btn__help'>Organizacjom pozarządowym</button>
+                    <button onClick={handleCurrent("locals")} className='btn btn__help'>Lokalnym zbiórkom</button>
                 </div>
-                <p className='help__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
-                <p className='help__description'>do eiusmod tempor incididunt ut labore et dolore magna</p>
-                <p className='help__description'>aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-
-                {organisations.map((organisation) => {
-                    return (
-                        <div>
-                            <h4>{organisation.title}</h4>
-                        </div>
-                    )
-                }
-
-                )}
+                <div className='help__description'>
+                    <p className='help__description-text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed</p>
+                    <p className='help__description-text'>do eiusmod tempor incididunt ut labore et dolore magna</p>
+                    <p className='help__description-text'>aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation.</p>
+                </div>
+                <Organisations organisations={currentOrganisations} />
+                <Pagination
+                    organisationsPerPage={organisationsPerPage}
+                    totalOrganisations={organisations.length}
+                    paginate={paginate}
+                    currentPage={currentPage}
+                />
             </div>
         </div>
     );
