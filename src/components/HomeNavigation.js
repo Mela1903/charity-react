@@ -45,11 +45,11 @@ const HomeNavigation = () => {
         <nav>
             <LoginStatus />
             <ul className="page-nav-list">
-                <li><a href="#" className="nav__link">Start</a></li>
-                <li><a href="#" className="nav__link">O co chodzi?</a></li>
-                <li><a href="#" className="nav__link">O nas</a></li>
-                <li><a href="#" className="nav__link">Fundacja i organizacje</a></li>
-                <li><a href="#" className="nav__link">Kontakt</a></li>
+                <li><a href="#start" className="nav__link">Start</a></li>
+                <li><a href="#steps" className="nav__link">O co chodzi?</a></li>
+                <li><a href="#about" className="nav__link">O nas</a></li>
+                <li><a href="#help" className="nav__link">Fundacja i organizacje</a></li>
+                <li><a href="#contact" className="nav__link">Kontakt</a></li>
             </ul>
         </nav>
     );

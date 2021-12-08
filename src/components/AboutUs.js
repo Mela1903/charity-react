@@ -2,7 +2,7 @@ import React from 'react';
 
 const AboutUs = () => {
     return (
-        <div className='flex about'>
+        <div className='flex about' id='about'>
                 <div className='about__text'>
                     <h2 className='headers_text'>O nas</h2>
                     <img src={require('../assets/Decoration.svg').default} alt='Decoration'/>

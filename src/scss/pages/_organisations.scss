@@ -1,0 +1,37 @@
+.organisations {
+  align-items: center;
+  width: 1344px;
+  border-bottom: 1px solid $color-grey;
+
+  &:last-of-type {
+    border-bottom: 1px solid transparent;
+  }
+}
+
+.organisation {
+  padding: 34px 0 31px;
+  justify-content: space-between;
+
+
+  &__characteristic {
+    flex-direction: column;
+    align-items: flex-start;
+
+    &-title {
+      font-size: 26px;
+      line-height: 31px;
+      font-weight: 300;
+    }
+
+    &-subtitle, {
+      font-size: 18px;
+      line-height: 22px;
+    }
+  }
+
+  &__needs {
+    justify-content: center;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

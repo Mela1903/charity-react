@@ -2,7 +2,7 @@ import React from 'react';
 
 const HomeSteps = () => {
     return (
-        <div className='steps'>
+        <div className='steps' id='steps'>
             <h2 className='headers_text'>Wystarczą 4 proste kroki</h2>
             <img src={require('../assets/Decoration.svg').default} alt='Decoration'/>
 
