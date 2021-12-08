@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {db} from "../firebase";
-import {collection, getDocs, query, where} from 'firebase/firestore'
+import {collection, getDocs} from 'firebase/firestore'
 import Organisations from "./Organisations";
 import Pagination from "./Pagination";
 
@@ -10,12 +10,14 @@ const Help = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [organisationsPerPage, setOrganisationsPerPage] = useState(3);
     const [current, setCurrent] = useState("foundations")
-    const [orgList, setOrgList] = useState([])
+    const [orgList, setOrgList] = useState([]);
 
     useEffect(() => {
         const getOrganisations = async () => {
             const data = await getDocs(organisationsCollectionRef);
-            setOrganisations(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+            const orgMap = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+            setOrganisations(orgMap);
+            setOrgList(orgMap.filter(el => el.category === current));
         };
         getOrganisations();
     }, [])
@@ -24,14 +26,9 @@ const Help = () => {
         setCurrent(name)
     }
 
-    useEffect(async () => {
-        const organisationsList = query(organisationsCollectionRef, where("category", "==", "organisations"))
-        const foundationsList = query(organisationsCollectionRef, where("category", "==", "foundations"))
-        const localsList = query(organisationsCollectionRef, where("category", "==", "locals"))
-        const organisationsQuery = await getDocs(organisationsList);
-        orgList.push(organisationsQuery)
-        orgList.push(localsList)
-        orgList.push(foundationsList)
+    useEffect( () => {
+        const currentList = organisations.filter(el => el.category === current);
+        setOrgList(currentList);
     }, [current])
 
     const indexOfLastOrganisation = currentPage * organisationsPerPage;
@@ -60,7 +57,7 @@ const Help = () => {
                 <Organisations organisations={currentOrganisations} />
                 <Pagination
                     organisationsPerPage={organisationsPerPage}
-                    totalOrganisations={organisations.length}
+                    totalOrganisations={orgList.length}
                     paginate={paginate}
                     currentPage={currentPage}
                 />
