@@ -2,7 +2,7 @@ import React from 'react';
 
 const Organisations = ({ organisations }) => {
     return (
-        <ul >
+        <ul className='org-list'>
             {organisations.map(organisation => (
                 <li key={organisation.id} className='organisations'>
                     <div className='flex organisation'>

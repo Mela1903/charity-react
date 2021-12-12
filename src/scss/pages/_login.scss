@@ -44,11 +44,12 @@
   }
 
   &__input {
-    border: none;
-    border-bottom: 1px solid $color-grey;
-    background-color: inherit;
+    @include styled-input;
     line-height: 40px;
-    width: 100%;
+
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0px 1000px $color-white inset;
+    }
   }
 
   &__links {

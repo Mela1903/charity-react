@@ -1,6 +1,7 @@
 @import "~normalize-scss/sass/normalize/import-now";
 @import "settings/fonts";
 @import "settings/colors";
+@import "settings/mixins";
 @import "elements/base";
 @import "pages/home";
 @import "pages/navigation";
@@ -14,3 +15,4 @@
 @import "pages/logout";
 @import "pages/organisations";
 @import "pages/pagination";
+@import "pages/contact";
