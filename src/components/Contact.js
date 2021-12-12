@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import Footer from "./Footer";
 
 const Contact = () => {
     const initialContactData = {
@@ -145,7 +146,7 @@ const Contact = () => {
                     </button>
                 </form>
             </div>
-            {/*<HomeFooter/>*/}
+            <Footer />
         </section>
     );
 };

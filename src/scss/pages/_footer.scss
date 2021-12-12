@@ -1,0 +1,26 @@
+footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 22px;
+
+  span {
+    font-size: 18px;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+  }
+
+  .footer-media {
+    margin-right: 142px;
+
+    a:first-of-type{
+      margin-right: 20px;
+    }
+  }
+}
