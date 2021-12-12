@@ -54,7 +54,6 @@ export default function Login() {
             }
             setLoading(false)
         }
-
     }
 
     const redirectToRegister = e => {
@@ -96,7 +95,13 @@ export default function Login() {
 
                     <div className='form__links'>
                         <button className='btn btn__login' onClick={redirectToRegister}> Załóż konto</button>
-                        <button className='btn btn__login' disabled={loading} type="submit">Zaloguj się</button>
+                        <button
+                            className='btn btn__login'
+                            disabled={loading}
+                            type="submit"
+                            form='login-form'
+                        >
+                            Zaloguj się</button>
                     </div>
                 </form>
                 {renderAPIError()}
