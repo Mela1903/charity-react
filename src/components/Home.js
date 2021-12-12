@@ -4,6 +4,7 @@ import HomeThreeColumns from "./HomeThreeColumns";
 import HomeSteps from "./HomeSteps";
 import AboutUs from "./AboutUs";
 import Help from "./Help";
+import Contact from "./Contact";
 
 const Home = () => {
     return (
@@ -13,6 +14,7 @@ const Home = () => {
             <HomeSteps />
             <AboutUs />
             <Help />
+            <Contact />
         </>
     );
 };
