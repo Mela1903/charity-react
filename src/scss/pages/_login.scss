@@ -50,10 +50,19 @@
     &:-webkit-autofill {
       -webkit-box-shadow: 0 0 0px 1000px $color-white inset;
     }
+
+    &.error {
+      border-color: $color-error;
+    }
   }
 
   &__links {
     display: flex;
     justify-content: space-between;
   }
+}
+
+.field-error{
+  color: red;
+  font-size: 11px;
 }
