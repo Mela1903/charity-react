@@ -3,6 +3,10 @@
   display: flex;
   padding-right: 142px;
 
+  &-donation {
+    height: 853px;
+  }
+
   &__backgroundImage {
     background-image: url(../../assets/Home-Hero-Image.jpg);
     height: 100vh;
@@ -10,6 +14,11 @@
     background-position: right;
     background-repeat: no-repeat;
     background-size: cover;
+
+    &-formHero {
+      background-image: url(../../assets/Form-Hero-Image.jpg);
+      height: 853px;
+    }
   }
 
   &__open {
@@ -25,6 +34,11 @@
 
     .decoration {
       margin-bottom: 65px;
+    }
+
+    &-donation {
+      padding-top: 109px;
+
     }
   }
 }

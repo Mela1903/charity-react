@@ -1,0 +1,72 @@
+.donation--steps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+  color: $color-dark-grey;
+
+  &-title {
+    text-align: center;
+    font-size: 40px;
+    line-height: 55px;
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    margin-top: 60px;
+
+    li {
+      border: 0.75px solid $color-dark-grey;
+      transform: rotate(45deg);
+      width: 135px;
+      height: 135px;
+      margin: 0 14px;
+
+      .elements-text {
+        transform: rotate(-45deg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100px;
+        height: 100px;
+
+        text {
+          font-size: 32px;
+          align-self: center;
+          padding: 0;
+        }
+
+        span {
+          font-size: 22px;
+          margin-top: 15px;
+        }
+      }
+    }
+  }
+}
+
+.donation--alert {
+  height: 179px;
+  padding-left: 142px;
+  background-color: $color-yellow;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  h3 {
+    font-size: 36px;
+    font-weight: 600;
+    color: $color-black;
+    line-height: 49px;
+  }
+  p {
+    font-size: 22px;
+    color: $color-dark-grey;
+    line-height: 30px;
+  }
+}

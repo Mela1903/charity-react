@@ -1,0 +1,48 @@
+.banner-form {
+  background-image: url(../../../assets/Background-Form.jpg);
+  height: 883px;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &_container {
+    height: 797px;
+    padding: 36px 0 50px 142px;
+  }
+}
+.type {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  margin-bottom: 15px;
+  padding-top: 50px;
+  padding-left: 70px;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+
+    &:checked ~ .checkmark {
+      background-color: $color-yellow;
+    }
+  }
+
+  .checkmark {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    border: 0.75px solid $color-grey;
+  }
+}
+
+.donation-form {
+  height: 650px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

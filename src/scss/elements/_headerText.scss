@@ -9,4 +9,12 @@
   font-size: 18px;
   line-height: 24px;
   font-weight: 400;
+
+    &-donation-form {
+      font-size: 36px;
+      line-height: 45px;
+      color: $color-black;
+      font-weight: 600;
+      padding-top: 70px;
+    }
 }
