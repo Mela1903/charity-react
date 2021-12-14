@@ -11,10 +11,10 @@ const DonationAddress = () => {
                 <div className='banner-form'>
                     <div className='banner-form_container'>
                         <span>Krok 4/4</span>
-                        <h3 className='header3_text-donation-form'>Podaj adres oraz termin odbioru rzecz przez kuriera</h3>
+                        <h3 className='header3_text-donation-form'>Podaj adres oraz termin odbioru rzeczy przez kuriera</h3>
                         <form id='donation-form' className='flex address'>
                             <div className='flex address_column'>
-                                <div > Adres odbioru:
+                                <div className='address_column--text'> Adres odbioru:
                                     <label>ulica:</label>
                                     <input type='text'/>
                                 </div>

@@ -60,8 +60,11 @@
   }
 
   &address {
-    &__column {
+    &_column {
       flex-direction: column;
     }
+    &--text {
+      flex-direction: column;
+    };
   }
 }
