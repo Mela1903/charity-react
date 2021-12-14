@@ -5,6 +5,7 @@ import {AuthProvider} from "./contexts/AuthContext";
 import Login from "./components/Login";
 import PrivateRoute from "./routers/PrivateRoute";
 import Logout from "./components/Logout";
+import Donation from "./components/Donation/Donation";
 
 function App() {
     return (
@@ -26,6 +27,10 @@ function App() {
                     <Route
                         path="/wylogowano"
                         element={<Logout />}
+                    />
+                    <Route
+                        path="/oddaj-rzeczy"
+                        element={<Donation />}
                     />
                 </Routes>
             </AuthProvider>
