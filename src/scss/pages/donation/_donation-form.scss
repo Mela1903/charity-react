@@ -53,18 +53,35 @@
   height: 650px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 
   &__select {
     padding-top: 50px;
-  }
 
-  &address {
-    &_column {
-      flex-direction: column;
+    &-city {
+      padding: 20px 0 50px;
     }
-    &--text {
-      flex-direction: column;
-    };
   }
+}
+.address {
+  padding-top: 50px;
+  &_column {
+    flex-direction: row;
+  }
+  &--text {
+    flex-direction: column;
+    margin-right: 152px;
+  };
+}
+.size {
+  width: 360px;
+  flex-direction: column;
+  padding-bottom: 46px;
+}
+.label-needs {
+   font-size: 24px;
+   font-weight: 600;
+ }
+
+.summary {
+  flex-direction: column;
 }

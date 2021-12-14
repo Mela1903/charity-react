@@ -3,7 +3,6 @@ import DonationHeaderAlert from "./DonationHeaderAlert";
 
 const DonationType = ({ values, handleChange }) => {
     const text = 'Uzupełnij szczegóły dotyczące Twoich rzeczy. Dzięki temu będziemy wiedzieć komu najlepiej je przekazać.'
-    console.log(values, handleChange)
 
     const typesList = [
         ['clothesReuse', 'ubrania, które nadają się do ponownego użycia'],
@@ -26,12 +25,12 @@ const DonationType = ({ values, handleChange }) => {
                                 <label className='type' key={ i }>
                                     <input
                                         type='radio'
-                                        value={ value }
+                                        value={ text }
                                         name='type'
                                         onChange={handleChange('type')}
                                         defaultValue={values.type}
                                     />
-                                    <span className='checkmark'></span>
+                                    <span className='checkmark'/>
                                     { text }
                                 </label>
                             ))}

@@ -8,12 +8,12 @@ const DonationLocalization = ({ values, handleSelectChange, handleChange}) => {
 
     const handleCityChange = (e) => {
         setLocalizationCity(e.target.value);
-        handleSelectChange("bags", e.target.value);
+        handleSelectChange("localization", e.target.value);
     }
 
     const cities = ['Poznań', 'Warszawa', 'Kraków', 'Wrocław', 'Katowice']
 
-    const whoToHelpList = [
+    const helpGroups = [
         {
            name: 'dzieciom'
         },
@@ -46,7 +46,7 @@ const DonationLocalization = ({ values, handleSelectChange, handleChange}) => {
 
     const handleNotesChange = (e) => {
         setNote(e.target.value) ;
-        handleSelectChange("note",e.target.value);
+        handleSelectChange("localizationSpecific",e.target.value);
     }
 
     return (
@@ -57,7 +57,7 @@ const DonationLocalization = ({ values, handleSelectChange, handleChange}) => {
                     <span>Krok 3/4</span>
                     <h3 className='header3_text-donation-form'>Lokalizacja:</h3>
                     <form id='donation-form' className='donation-form'>
-                        <div className='donation-form__select'>
+                        <div className='donation-form__select-city'>
                             <select
                                 value={localizationCity}
                                 onChange={handleCityChange}
@@ -71,12 +71,16 @@ const DonationLocalization = ({ values, handleSelectChange, handleChange}) => {
                                 ))}
                             </select>
                         </div>
-                        <label>
+                    <div className='flex size'>
+                        <label className='label-needs'>
                             Komu chcesz pomóc?
                             {checkedItems['dzieciom']}
                         </label>
-                        {whoToHelpList.map(item => (
-                            <label key={item.key}>
+                        {helpGroups.map(item => (
+                            <label
+                                key={item.key}
+                                className='flex'
+                            >
                                 {item.name}
                                 <input
                                     name={item.name}
@@ -86,8 +90,13 @@ const DonationLocalization = ({ values, handleSelectChange, handleChange}) => {
                                 />
                             </label>
                         ))}
-                        <label>Wpisz nazwę konkretnej organizacji (opcjonalnie)</label>
-                        <textarea onChange={handleNotesChange}/>
+                    </div>
+
+
+                        <label className='label-needs'>Wpisz nazwę konkretnej organizacji (opcjonalnie)</label>
+                        <textarea
+                            onChange={handleNotesChange}
+                        />
                     </form>
                 </div>
 

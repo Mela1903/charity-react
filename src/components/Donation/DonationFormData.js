@@ -3,15 +3,11 @@ import DonationType from "./DonationType";
 import DonationBags from "./DonationBags";
 import DonationLocalization from "./DonationLocalization";
 import DonationAddress from "./DonationAddress";
+import DonationSummary from "./DonationSummary";
+import DonationConfirmation from "./DonationConfirmation";
 
 const DonationFormData = () => {
     const [activeStep, setActiveStep] = useState(1)
-
-    const getSteps = () => {
-        return ["type", "bags", "localization", "address", "summary", "thank you"]
-    }
-
-    // const steps = getSteps()
 
     const [multiFormValues, setMultiFormValues] = useState({
         type: '',
@@ -58,19 +54,28 @@ const DonationFormData = () => {
             {activeStep === 4 && (
                 <DonationAddress values={multiFormValues} handleChange={handleChange} />
             )}
-            <div className='flex'>
+            {activeStep === 5 && (
+                <DonationSummary values={multiFormValues}/>
+            )}
+            {activeStep === 6 && (
+                <DonationConfirmation />
+            )}
+            <div className='flex btn-donation-steps'>
                 <button
                     className='btn btn__donation-form'
-                    hidden={activeStep === 1}
+                    hidden={activeStep === 1 || activeStep === 6}
                     onClick={handlePreviousStep}
                 >
                     Wstecz</button>
                 <button
                     className='btn btn__donation-form'
                     onClick={handleNextStep}
+                    hidden={activeStep === 6}
                 >
-                    Dalej</button>
+                    {activeStep === 5 ? 'Potwierdzam' : 'Dalej'}
+                    </button>
             </div>
+
         </div>
     );
 };
