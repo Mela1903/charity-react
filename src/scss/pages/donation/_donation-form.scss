@@ -9,6 +9,15 @@
   &_container {
     height: 797px;
     padding: 36px 0 50px 142px;
+
+    span {
+      font-size: 24px;
+      color: $color-dark-grey;
+    };
+  }
+
+  &__address {
+    flex-direction: column;
   }
 }
 .type {
@@ -45,4 +54,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  &__select {
+    padding-top: 50px;
+  }
+
+  &address {
+    &__column {
+      flex-direction: column;
+    }
+  }
 }

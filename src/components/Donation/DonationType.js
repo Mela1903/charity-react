@@ -1,8 +1,9 @@
 import React from 'react';
 import DonationHeaderAlert from "./DonationHeaderAlert";
 
-const DonationType = () => {
+const DonationType = ({ values, handleChange }) => {
     const text = 'Uzupełnij szczegóły dotyczące Twoich rzeczy. Dzięki temu będziemy wiedzieć komu najlepiej je przekazać.'
+    console.log(values, handleChange)
 
     const typesList = [
         ['clothesReuse', 'ubrania, które nadają się do ponownego użycia'],
@@ -27,18 +28,15 @@ const DonationType = () => {
                                         type='radio'
                                         value={ value }
                                         name='type'
+                                        onChange={handleChange('type')}
+                                        defaultValue={values.type}
                                     />
                                     <span className='checkmark'></span>
                                     { text }
                                 </label>
                             ))}
                         </div>
-                        <button
-                            className='btn btn__donation-form'
-                            form='donation-form'
-                            type='submit'
-                        >
-                            Dalej</button>
+
                     </form>
                 </div>
 

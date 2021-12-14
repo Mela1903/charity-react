@@ -1,13 +1,15 @@
 import React from 'react';
 import DonationHeader from "./DonationHeader";
 import Contact from "../Contact";
-import DonationType from "./DonationType";
+import DonationFormData from "./DonationFormData";
 
 const Donation = () => {
     return (
         <div>
             <DonationHeader />
-            <DonationType />
+            {/*<DonationType />*/}
+            {/*<DonationBags />*/}
+            <DonationFormData />
             <Contact />
         </div>
     );
