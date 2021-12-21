@@ -24,6 +24,10 @@ const DonationFormData = () => {
         note: ''
     })
 
+    const toggleType = (updatedType) => {
+        setMultiFormValues(prevState => prevState.type = updatedType)
+    }
+
     const handleNextStep = () => {
         setActiveStep((nextStep) => nextStep + 1)
     }
@@ -43,13 +47,13 @@ const DonationFormData = () => {
     return (
         <div>
             {activeStep === 1 && (
-                <DonationType values={multiFormValues} handleChange={handleChange}/>
+                <DonationType values={multiFormValues} handleSelectChange={handleSelectChange} />
             )}
             {activeStep === 2 && (
                 <DonationBags values={multiFormValues} handleSelectChange={handleSelectChange}/>
             )}
             {activeStep === 3 && (
-                <DonationLocalization values={multiFormValues} handleChange={handleChange} handleSelectChange={handleSelectChange} />
+                <DonationLocalization values={multiFormValues} handleSelectChange={handleSelectChange} />
             )}
             {activeStep === 4 && (
                 <DonationAddress values={multiFormValues} handleChange={handleChange} />

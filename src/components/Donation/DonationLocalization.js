@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import DonationHeaderAlert from "./DonationHeaderAlert";
 
-const DonationLocalization = ({ values, handleSelectChange, handleChange}) => {
+const DonationLocalization = ({ values, handleSelectChange }) => {
     const text = 'Jeśli wiesz komu chcesz pomóc, możesz wpisać nazwę tej organizacji w wyszukiwarce. Możesz też filtrować organizacje po ich lokalizacji bądź celu ich pomocy.'
 
-    const [localizationCity, setLocalizationCity] = useState('');
+    const [localizationCity, setLocalizationCity] = useState(values.localization);
 
     const handleCityChange = (e) => {
         setLocalizationCity(e.target.value);
@@ -31,7 +31,7 @@ const DonationLocalization = ({ values, handleSelectChange, handleChange}) => {
         }
     ]
 
-    const [checkedItems, setCheckedItem] = useState({})
+    const [checkedItems, setCheckedItem] = useState(values.helpGroups)
 
     const handleChangeCheckbox = (e) => {
         console.log(e.target.name, e.target.value)
@@ -42,7 +42,7 @@ const DonationLocalization = ({ values, handleSelectChange, handleChange}) => {
         handleSelectChange("helpGroups", checkedItems)
     }, [checkedItems]);
 
-    const [note, setNote] = useState('')
+    const [note, setNote] = useState(values.localizationSpecific)
 
     const handleNotesChange = (e) => {
         setNote(e.target.value) ;
@@ -96,6 +96,7 @@ const DonationLocalization = ({ values, handleSelectChange, handleChange}) => {
                         <label className='label-needs'>Wpisz nazwę konkretnej organizacji (opcjonalnie)</label>
                         <textarea
                             onChange={handleNotesChange}
+                            value={note}
                         />
                     </form>
                 </div>

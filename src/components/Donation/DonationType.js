@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import DonationHeaderAlert from "./DonationHeaderAlert";
 
-const DonationType = ({ values, handleChange }) => {
+const DonationType = ({ values, handleSelectChange }) => {
     const text = 'Uzupełnij szczegóły dotyczące Twoich rzeczy. Dzięki temu będziemy wiedzieć komu najlepiej je przekazać.'
+
+    const [selectedType, setSelectedType] = useState(values.type);
 
     const typesList = [
         ['clothesReuse', 'ubrania, które nadają się do ponownego użycia'],
@@ -11,6 +13,11 @@ const DonationType = ({ values, handleChange }) => {
         ['books', 'książki'],
         ['other', 'Inne']
     ]
+
+    const handleTypeChange = (e) => {
+        setSelectedType(e.target.value);
+        handleSelectChange('type', e.target.value);
+    }
 
     return (
         <div>
@@ -27,8 +34,9 @@ const DonationType = ({ values, handleChange }) => {
                                         type='radio'
                                         value={ text }
                                         name='type'
-                                        onChange={handleChange('type')}
+                                        onChange={handleTypeChange}
                                         defaultValue={values.type}
+                                        checked={selectedType === text}
                                     />
                                     <span className='checkmark'/>
                                     { text }
