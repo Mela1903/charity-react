@@ -89,7 +89,6 @@ const DonationSummary = ({ values }) => {
                                 <span>{values.note}</span>
                             </div>
                         </div>
-
                     </div>
 
                 </div>
