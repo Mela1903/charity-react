@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import DonationHeaderAlert from "./DonationHeaderAlert";
 
-const DonationType = ({ values, handleSelectChange }) => {
+const DonationType = ({ values, handleSelectChange, setFormInputName}) => {
     const text = 'Uzupełnij szczegóły dotyczące Twoich rzeczy. Dzięki temu będziemy wiedzieć komu najlepiej je przekazać.'
+    setFormInputName("type")
 
     const [selectedType, setSelectedType] = useState(values.type);
 
@@ -16,8 +17,10 @@ const DonationType = ({ values, handleSelectChange }) => {
 
     const handleTypeChange = (e) => {
         setSelectedType(e.target.value);
-        handleSelectChange('type', e.target.value);
+        handleSelectChange('type', e.target.value, e.target.name);
     }
+
+
 
     return (
         <div>

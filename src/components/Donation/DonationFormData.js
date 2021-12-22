@@ -8,7 +8,7 @@ import DonationConfirmation from "./DonationConfirmation";
 
 const DonationFormData = () => {
     const [activeStep, setActiveStep] = useState(1)
-
+    const [formInputName, setFormInputName] = useState('')
     const [multiFormValues, setMultiFormValues] = useState({
         type: '',
         bags: "",
@@ -24,12 +24,18 @@ const DonationFormData = () => {
         note: ''
     })
 
-    const toggleType = (updatedType) => {
-        setMultiFormValues(prevState => prevState.type = updatedType)
-    }
+    const [isNextAvailable, setIsNextAvailable] = useState(false);
+    console.log(isNextAvailable)
 
-    const handleNextStep = () => {
-        setActiveStep((nextStep) => nextStep + 1)
+    const handleNextStep = (attribute) => {
+        console.log(attribute, multiFormValues[attribute])
+        if (multiFormValues[attribute] !== '') {
+            setIsNextAvailable(true);
+            setActiveStep((nextStep) => nextStep + 1);
+
+        } else {
+            setIsNextAvailable(false)
+        }
     }
 
     const handlePreviousStep = () => {
@@ -37,26 +43,28 @@ const DonationFormData = () => {
     }
 
     const handleChange = (input) => (e) => {
-        setMultiFormValues({...multiFormValues, [input]: e.target.value})
+        setFormInputName(e.target.name);
+        setMultiFormValues({...multiFormValues, [input]: e.target.value});
     }
 
-    const handleSelectChange = (input, number) => {
-        setMultiFormValues({...multiFormValues, [input]: number})
+    const handleSelectChange = (input, number, inputName) => {
+        setFormInputName(inputName);
+        setMultiFormValues({...multiFormValues, [input]: number});
     }
 
     return (
         <div>
             {activeStep === 1 && (
-                <DonationType values={multiFormValues} handleSelectChange={handleSelectChange} />
+                <DonationType values={multiFormValues} handleSelectChange={handleSelectChange} setFormInputName={setFormInputName} />
             )}
             {activeStep === 2 && (
-                <DonationBags values={multiFormValues} handleSelectChange={handleSelectChange}/>
+                <DonationBags values={multiFormValues} handleSelectChange={handleSelectChange} setIsNextAvailable={setIsNextAvailable} setFormInputName={setFormInputName}/>
             )}
             {activeStep === 3 && (
-                <DonationLocalization values={multiFormValues} handleSelectChange={handleSelectChange} />
+                <DonationLocalization values={multiFormValues} handleSelectChange={handleSelectChange} setIsNextAvailable={setIsNextAvailable} />
             )}
             {activeStep === 4 && (
-                <DonationAddress values={multiFormValues} handleChange={handleChange} />
+                <DonationAddress values={multiFormValues} handleChange={handleChange} setIsNextAvailable={setIsNextAvailable} />
             )}
             {activeStep === 5 && (
                 <DonationSummary values={multiFormValues}/>
@@ -73,7 +81,7 @@ const DonationFormData = () => {
                     Wstecz</button>
                 <button
                     className='btn btn__donation-form'
-                    onClick={handleNextStep}
+                    onClick={() => handleNextStep(formInputName)}
                     hidden={activeStep === 6}
                 >
                     {activeStep === 5 ? 'Potwierdzam' : 'Dalej'}

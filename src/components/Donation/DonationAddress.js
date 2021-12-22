@@ -1,8 +1,10 @@
 import React from 'react';
 import DonationHeaderAlert from "./DonationHeaderAlert";
 
-const DonationAddress = ({ values, handleChange }) => {
+const DonationAddress = ({ values, handleChange, setIsNextAvailable }) => {
+    setIsNextAvailable(false);
     const text = 'Podaj adres oraz termin odbioru rzeczy.'
+
 
     return (
         <div>
@@ -19,6 +21,7 @@ const DonationAddress = ({ values, handleChange }) => {
                                         <label>Ulica</label>
                                         <input
                                             type='text'
+                                            name='street'
                                             defaultValue={values.street}
                                             onChange={handleChange('street')}
                                         />
@@ -27,6 +30,7 @@ const DonationAddress = ({ values, handleChange }) => {
                                         <label>Miasto</label>
                                         <input
                                             type='text'
+                                            name='city'
                                             defaultValue={values.city}
                                             onChange={handleChange('city')}
                                         />
@@ -35,6 +39,7 @@ const DonationAddress = ({ values, handleChange }) => {
                                         <label>Kod pocztowy</label>
                                         <input
                                             type='text'
+                                            name='postCode'
                                             defaultValue={values.postCode}
                                             onChange={handleChange('postCode')}
                                         />
@@ -43,6 +48,7 @@ const DonationAddress = ({ values, handleChange }) => {
                                         <label>Numer telefonu</label>
                                         <input
                                             type='phone'
+                                            name='phone'
                                             defaultValue={values.phone}
                                             onChange={handleChange('phone')}
                                         />
@@ -53,6 +59,7 @@ const DonationAddress = ({ values, handleChange }) => {
                                         <label>Data</label>
                                         <input
                                             type='date'
+                                            name='date'
                                             defaultValue={values.date}
                                             onChange={handleChange('date')}
                                         />
@@ -61,6 +68,7 @@ const DonationAddress = ({ values, handleChange }) => {
                                         <label>Godzina</label>
                                         <input
                                             type='time'
+                                            name='time'
                                             defaultValue={values.time}
                                             onChange={handleChange('time')}
                                         />
@@ -69,6 +77,7 @@ const DonationAddress = ({ values, handleChange }) => {
                                         <label>Uwagi dla kuriera</label>
                                         <input
                                             type='textarea'
+                                            name='note'
                                             defaultValue={values.note}
                                             onChange={handleChange('note')}
                                         />

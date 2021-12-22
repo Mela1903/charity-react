@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
 import DonationHeaderAlert from "./DonationHeaderAlert";
 
-const DonationBags = ({ values, handleSelectChange}) => {
+const DonationBags = ({ values, handleSelectChange, setIsNextAvailable, setFormInputName}) => {
+    setIsNextAvailable(false);
+    setFormInputName("bags")
     const text = 'Wszystkie rzeczy do oddania zapakuj w 60l worki. Dokładną instrukcję jak poprawnie spakować rzeczy znajdziesz TUTAJ.'
 
     const [bagsNumber, setBagsNumber] = useState(values.bags);
 
     const handleBagsNumberChange = (e) => {
         setBagsNumber(e.target.value);
-        handleSelectChange("bags", e.target.value);
+        handleSelectChange("bags", e.target.value, e.target.name);
     }
 
     return (
@@ -22,6 +24,7 @@ const DonationBags = ({ values, handleSelectChange}) => {
                         <div className='donation-form__select'>
                             Liczba 60l worków:
                             <select
+                                name='bags'
                                 value={bagsNumber}
                                 onChange={handleBagsNumberChange}
                                 defaultValue={values.bags}

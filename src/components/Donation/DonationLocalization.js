@@ -1,14 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import DonationHeaderAlert from "./DonationHeaderAlert";
 
-const DonationLocalization = ({ values, handleSelectChange }) => {
+const DonationLocalization = ({ values, handleSelectChange, setIsNextAvailable }) => {
+    setIsNextAvailable(false);
     const text = 'Jeśli wiesz komu chcesz pomóc, możesz wpisać nazwę tej organizacji w wyszukiwarce. Możesz też filtrować organizacje po ich lokalizacji bądź celu ich pomocy.'
+
 
     const [localizationCity, setLocalizationCity] = useState(values.localization);
 
+
     const handleCityChange = (e) => {
         setLocalizationCity(e.target.value);
-        handleSelectChange("localization", e.target.value);
+        handleSelectChange("localization", e.target.value, "localization");
     }
 
     const cities = ['Poznań', 'Warszawa', 'Kraków', 'Wrocław', 'Katowice']
@@ -34,19 +37,18 @@ const DonationLocalization = ({ values, handleSelectChange }) => {
     const [checkedItems, setCheckedItem] = useState(values.helpGroups)
 
     const handleChangeCheckbox = (e) => {
-        console.log(e.target.name, e.target.value)
         setCheckedItem({...checkedItems, [e.target.name] : e.target.checked})
     }
 
     useEffect(() => {
-        handleSelectChange("helpGroups", checkedItems)
+        handleSelectChange("helpGroups", checkedItems, "helpGroups")
     }, [checkedItems]);
 
     const [note, setNote] = useState(values.localizationSpecific)
 
     const handleNotesChange = (e) => {
         setNote(e.target.value) ;
-        handleSelectChange("localizationSpecific",e.target.value);
+        handleSelectChange("localizationSpecific",e.target.value, e.target.name);
     }
 
     return (
@@ -59,6 +61,7 @@ const DonationLocalization = ({ values, handleSelectChange }) => {
                     <form id='donation-form' className='donation-form'>
                         <div className='donation-form__select-city'>
                             <select
+                                name='localization'
                                 value={localizationCity}
                                 onChange={handleCityChange}
                                 defaultValue={values.localization}
@@ -66,7 +69,8 @@ const DonationLocalization = ({ values, handleSelectChange }) => {
                                 <option value=''>- wybierz -</option>
                                 {cities.map((city, index) => (
                                     <option
-                                        value={city} key={index}>{city}
+                                        value={city}
+                                        key={index}>{city}
                                     </option>
                                 ))}
                             </select>
@@ -97,6 +101,7 @@ const DonationLocalization = ({ values, handleSelectChange }) => {
                         <textarea
                             onChange={handleNotesChange}
                             value={note}
+                            name='localizationSpecific'
                         />
                     </form>
                 </div>
