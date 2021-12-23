@@ -11,7 +11,7 @@ const DonationFormData = () => {
         type: '',
         bags: "",
         localization: '',
-        helpGroups: '',
+        helpGroups: [],
         localizationSpecific: '',
         street: '',
         city: '',

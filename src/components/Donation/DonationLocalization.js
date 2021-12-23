@@ -88,7 +88,7 @@ const DonationLocalization = ({ values, handleSelectChange, setIsNextAvailable, 
 
     const [checkedItems, setCheckedItems] = useState(values.helpGroups)
 
-    const [checkedItemsTest, setCheckedItemsTest] = useState([]);
+    const [checkedItemsTest, setCheckedItemsTest] = useState(values.helpGroups);
 
     const handleCheckbox = (data) => {
         const isChecked = checkedItemsTest.some(element => element === data)
