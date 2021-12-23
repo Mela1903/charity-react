@@ -1,7 +1,7 @@
 import React from 'react';
 import DonationHeaderAlert from "./DonationHeaderAlert";
 
-const DonationAddress = ({ values, handleChange, setIsNextAvailable }) => {
+const DonationAddress = ({ values, handleChange, setIsNextAvailable, prevStep, nextStep }) => {
     setIsNextAvailable(false);
     const text = 'Podaj adres oraz termin odbioru rzeczy.'
 
@@ -83,6 +83,15 @@ const DonationAddress = ({ values, handleChange, setIsNextAvailable }) => {
                                         />
                                     </div>
                                 </div>
+                            </div>
+
+                            <div className='flex btn-donation-steps'>
+                                <button className='btn btn__donation-form' onClick={prevStep}>
+                                    Wstecz
+                                </button>
+                                <button className='btn btn__donation-form' type='submit'>
+                                    Dalej
+                                </button>
                             </div>
 
                         </form>
