@@ -72,11 +72,12 @@ const DonationType = ({ values, handleSelectChange, setFormInputName, nextStep }
 
                             {functionError()}
 
-
                         </div>
+                        <div className='flex btn-donation-steps'>
                         <button className='btn btn__donation-form' type='submit'>
                         Dalej
                     </button>
+                        </div>
                     </form>
                 </div>
             </div>

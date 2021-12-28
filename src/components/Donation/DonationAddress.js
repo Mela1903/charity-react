@@ -14,7 +14,7 @@ const DonationAddress = ({ values, handleChange, setIsNextAvailable, prevStep, n
                     <div className='banner-form_container'>
                         <span>Krok 4/4</span>
                         <h3 className='header3_text-donation-form'>Podaj adres oraz termin odbioru rzeczy przez kuriera</h3>
-                        <form id='donation-form' className='flex address'>
+                        <form id='donation-form' className='donation-form'>
                             <div className='flex address_column'>
                                 <div className='address--text'> Adres odbioru:
                                     <div className='flex'>

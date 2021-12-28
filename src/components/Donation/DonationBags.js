@@ -6,12 +6,6 @@ const DonationBags = ({ values, handleSelectChange, setIsNextAvailable, setFormI
     setFormInputName("bags")
     const text = 'Wszystkie rzeczy do oddania zapakuj w 60l worki. Dokładną instrukcję jak poprawnie spakować rzeczy znajdziesz TUTAJ.'
 
-    const [bagsNumber, setBagsNumber] = useState(values.bags);
-
-    const handleBagsNumberChange = (e) => {
-        setBagsNumber(e.target.value);
-        handleSelectChange("bags", e.target.value, e.target.name);
-    }
 
     const [error, setError] = useState(false)
 
@@ -34,47 +28,60 @@ const DonationBags = ({ values, handleSelectChange, setIsNextAvailable, setFormI
         }
     }
 
+    const [showItemList, setShowItemList] = useState(false);
+    const toggling = () => setShowItemList(!showItemList)
+    const [bagsNumber, setBagsNumber] = useState(values.bags)
+
+    const onOptionClicked = value => (e) => {
+        setBagsNumber(value);
+        setShowItemList(false);
+        handleSelectChange("bags", e.target.value, e.target.name);
+        console.log('selected:', bagsNumber);
+    };
+
     return (
-        <div>
-            <DonationHeaderAlert text={text}/>
-            <div className='banner-form'>
-                <div className='banner-form_container'>
-                    <span>Krok 2/4</span>
-                    <h3 className='header3_text-donation-form'>Podaj liczbę 60l worków, w które spakowałeś/aś
-                        rzeczy:</h3>
-                    <form id='donation-form' className='donation-form' onSubmit={submitFormData}>
-                        <div className='donation-form__select'>
-                            Liczba 60l worków:
-                            <select
-                                name='bags'
-                                value={bagsNumber}
-                                onChange={handleBagsNumberChange}
-                                defaultValue={values.bags}
-                            >
-                                <option value=''>- wybierz -</option>
-                                <option value='1'>1</option>
-                                <option value='2'>2</option>
-                                <option value='3'>3</option>
-                                <option value='4'>4</option>
-                                <option value='5'>5</option>
-                            </select>
+    <div>
+        <DonationHeaderAlert text={text}/>
+        <div className='banner-form'>
+            <div className='banner-form_container'>
+                <span>Krok 2/4</span>
+                <h3 className='header3_text-donation-form'>Podaj liczbę 60l worków, w które spakowałeś/aś rzeczy:</h3>
 
-                            {functionError()}
-
+                <form id='donation-form' className='donation-form' onSubmit={submitFormData}>
+                    <div className='donation-form__select flex'>
+                        <span style={{marginTop: '9px'}}>Liczba 60l worków:</span>
+                        <div className='dropdown-container'>
+                            <div className={showItemList ? 'dropdown-header open' : 'dropdown-header'} onClick={toggling}>
+                                {bagsNumber || '- wybierz -'}
+                            </div>
+                            {showItemList && (
+                                <div className='dropdown_list-container'>
+                                    <ul className='dropdown_list'>
+                                        <li className='list_item' value='1' onClick={onOptionClicked(1)}>1</li>
+                                        <li className='list_item' value='2' onClick={onOptionClicked(2)}>2</li>
+                                        <li className='list_item' value='3' onClick={onOptionClicked(3)}>3</li>
+                                        <li className='list_item' value='4' onClick={onOptionClicked(4)}>4</li>
+                                        <li className='list_item' value='5' onClick={onOptionClicked(5)}>5</li>
+                                    </ul>
+                                </div>
+                            )}
                         </div>
-                        <div className='flex btn-donation-steps'>
-                            <button className='btn btn__donation-form' onClick={prevStep}>
-                                Wstecz
-                            </button>
-                            <button className='btn btn__donation-form' type='submit'>
-                                Dalej
-                            </button>
-                        </div>
-                    </form>
+                        {functionError()}
 
-                </div>
+                    </div>
+                    <div className='flex btn-donation-steps'>
+                        <button className='btn btn__donation-form' onClick={prevStep}>
+                            Wstecz
+                        </button>
+                        <button className='btn btn__donation-form' type='submit'>
+                            Dalej
+                        </button>
+                    </div>
+                </form>
+
             </div>
         </div>
+    </div>
     );
 };
 

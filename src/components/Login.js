@@ -87,8 +87,7 @@ export default function Login() {
                                 className={error.passwordLength ? 'form__input error' : 'form__input'}
                                 type="password"
                                 ref={passwordRef}
-                                required
-                            />
+                                required/>
                             {renderPasswordError()}
                         </div>
                     </div>

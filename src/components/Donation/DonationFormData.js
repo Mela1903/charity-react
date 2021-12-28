@@ -3,6 +3,8 @@ import DonationType from "./DonationType";
 import DonationBags from "./DonationBags";
 import DonationLocalization from "./DonationLocalization";
 import DonationAddress from "./DonationAddress";
+import DonationSummary from "./DonationSummary";
+import DonationConfirmation from "./DonationConfirmation";
 
 const DonationFormData = () => {
     const [activeStep, setActiveStep] = useState(1)
@@ -113,6 +115,14 @@ const DonationFormData = () => {
             case 4:
                 return (
                     <DonationAddress values={multiFormValues} nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} setIsNextAvailable={setIsNextAvailable} />
+                )
+            case 5:
+                return (
+                    <DonationSummary values={multiFormValues}/>
+                )
+            case 6:
+                return (
+                    <DonationConfirmation />
                 )
         }
 

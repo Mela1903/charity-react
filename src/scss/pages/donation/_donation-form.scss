@@ -53,6 +53,15 @@
   height: 650px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  font-size: 24px;
+  color: $color-black;
+  font-weight: 300;
+
+  span {
+    margin-right: 26px;
+
+  }
 
   &__select {
     padding-top: 50px;
@@ -63,7 +72,9 @@
   }
 }
 .address {
+  flex-direction: column;
   padding-top: 50px;
+  justify-content: space-between;
   &_column {
     flex-direction: row;
   }
@@ -73,7 +84,7 @@
   };
 }
 .size {
-  width: 360px;
+  width: auto;
   flex-direction: column;
   padding-bottom: 46px;
 }
@@ -85,3 +96,122 @@
 .summary {
   flex-direction: column;
 }
+
+.wrapper {
+  position: relative;
+  display: inline-block;
+  border: 1px solid black;
+}
+
+.checkbox-button {
+  margin: 20px 24px 4px 0;
+  border:0.75px solid $color-dark-grey;
+  overflow:auto;
+  float:left;
+
+  label {
+    float: left;
+    width: 100%;
+
+    span {
+      text-align: center;
+      padding: 11px 25px;
+      display: block;
+      font-size: 24px;
+      color: $color-black;
+    }
+
+    input[type='checkbox'] {
+      //position: absolute;
+      //top: -20px;
+      display: none;
+
+      &:checked + span {
+        background-color: #911;
+        color: #fff;
+
+      }
+    }
+  }
+}
+
+.select {
+  width: 300px;
+  height: 49px;
+  border: 0.75px solid $color-dark-grey;
+  background-color: inherit;
+  padding-left: 18px;
+  font-weight: 300;
+
+  &-options {
+    position: absolute;
+    top: 50px
+  }
+}
+
+.dropdown-container {
+  width: 300px;
+  display: inline-block;
+}
+
+.dropdown-header {
+  padding-left: 18px;
+  border: 0.75px solid $color-dark-grey;
+  font-weight: 300;
+  font-size: 24px;
+  color: $color-black;
+  background: inherit;
+  height: 47px;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 11.5px;
+    right: 0;
+    background: transparent url(../../../assets/Icon-Arrow-Down.svg) 0% 0% no-repeat padding-box;
+    width: 57px;
+    height: 26px;
+  }
+
+  &.open {
+    &::after {
+      top: 11.5px;
+      right: 0;
+      background: transparent url(../../../assets/Icon-Arrow-Up.svg) 0% 0% no-repeat padding-box;
+    }
+  }
+};
+
+.dropdown_list-container {
+  display: flex;
+  flex-direction: row-reverse;
+};
+
+.dropdown_list {
+  margin-top: 15px;
+  text-align: center;
+  background: inherit;
+  border: 0.75px solid $color-dark-grey;
+  box-sizing: border-box;
+  color: $color-black;
+  font-size: 24px;
+  line-height: 33px;
+  font-weight: 300;
+  width: 86px;
+
+  &:first-child {
+    padding-top: 6px;
+  }
+
+  &:last-child {
+    padding-bottom: 6px;
+  }
+}
+
+.list_item {
+  list-style: none;
+  padding: 2px 0;
+};

@@ -16,7 +16,7 @@ const DonationLocalization = ({ values, handleSelectChange, setIsNextAvailable, 
 
     const [error, setError] = useState(false)
     const [errorHelpGroup, setErrorHelpGroup] = useState(false)
-    const [errorSpecific, setErrorSpecic] = useState(false)
+    const [errorSpecific, setErrorSpecific] = useState(false)
 
     const functionLocalizationError = () => {
         return (
@@ -41,7 +41,7 @@ const DonationLocalization = ({ values, handleSelectChange, setIsNextAvailable, 
         return (
             errorHelpGroup && (
                 <span style={{color: 'red'}}>
-                    Checkbox - komu chcesz pomóc
+                    komu chcesz pomóc
                 </span>
             )
         )
@@ -54,23 +54,23 @@ const DonationLocalization = ({ values, handleSelectChange, setIsNextAvailable, 
                 if (values.localizationSpecific === '') {
                     setError(true)
                     setErrorHelpGroup(true)
-                    setErrorSpecic(true)
+                    setErrorSpecific(true)
                 } else {
                     setError(false)
                     setErrorHelpGroup(true)
-                    setErrorSpecic(false)
+                    setErrorSpecific(false)
                 }
             } else if (values.localizationSpecific === '') {
                 setError(true)
                 setErrorHelpGroup(false)
-                setErrorSpecic(true)
+                setErrorSpecific(true)
             } else {
                 nextStep();
             }
         } else if (values.helpGroups.length === 0) {
             setError(false)
             setErrorHelpGroup(true)
-            setErrorSpecic(false)
+            setErrorSpecific(false)
         } else {
             nextStep();
         }
@@ -78,32 +78,24 @@ const DonationLocalization = ({ values, handleSelectChange, setIsNextAvailable, 
 
     const cities = ['Poznań', 'Warszawa', 'Kraków', 'Wrocław', 'Katowice']
 
-    const helpGroups = [
-         'dzieciom',
-        'samotnym matkom',
-        'bezdomnym',
-         'niepełnosprawnym',
-         'osobom starszym',
-    ]
+    const helpGroups = ['dzieciom', 'samotnym matkom', 'bezdomnym', 'niepełnosprawnym', 'osobom starszym']
 
     const [checkedItems, setCheckedItems] = useState(values.helpGroups)
 
     const [checkedItemsTest, setCheckedItemsTest] = useState(values.helpGroups);
 
     const handleCheckbox = (data) => {
+        console.log(data)
         const isChecked = checkedItemsTest.some(element => element === data)
         if (isChecked) {
             setCheckedItemsTest(
                 checkedItemsTest.filter(
                     (element) => element !== data
                 )
-        );
-
-
+            );
         } else {
             setCheckedItemsTest(checkedItemsTest.concat(data));
         }
-        console.log('to jest to: ', checkedItemsTest);
     };
 
     const handleChangeCheckbox = (e) => {
@@ -138,6 +130,7 @@ const DonationLocalization = ({ values, handleSelectChange, setIsNextAvailable, 
                                 value={localizationCity}
                                 onChange={handleCityChange}
                                 defaultValue={values.localization}
+                                className='select'
                             >
                                 <option value=''>- wybierz -</option>
                                 {cities.map((city, index) => (
@@ -147,36 +140,31 @@ const DonationLocalization = ({ values, handleSelectChange, setIsNextAvailable, 
                                     </option>
                                 ))}
                             </select>
-
                             {functionLocalizationError()}
                         </div>
 
                         {/*help Groups section*/}
-                        <div className='flex size'>
+                        <div className='flex' style={{flexDirection: 'column'}}>
                             <label className='label-needs'>
                                 Komu chcesz pomóc?
-                                {checkedItems['dzieciom']}
+                                {checkedItemsTest['dzieciom']}
                             </label>
-                            {helpGroups?.map((name, index) => (
-
-                                    <label
-                                        key={index}
-                                        className='flex'
-                                    >
-                                        {name}
-                                        <input
-                                            // key={`cb-${index}`}
-                                            value={name}
-                                            checked={checkedItemsTest.some(element => element === name)}
-                                            onClick={() => handleCheckbox(name)}
-                                            type='checkbox'
-                                        />
-                                    </label>
-
-                            ))}
-                            <pre>{JSON.stringify(checkedItemsTest, null, 2)}</pre>
-
-                            {functionHelpGroupError()}
+                            <div style={{flexDirection: 'row', width: 690}}>
+                                {helpGroups?.map((name, index) => (
+                                    <div className='checkbox-button flex' key={index}>
+                                        <label>
+                                            <span>{name}</span>
+                                            <input
+                                                value={name}
+                                                checked={checkedItemsTest.some(element => element === name)}
+                                                onClick={() => handleCheckbox(name)}
+                                                type='checkbox'
+                                            />
+                                        </label>
+                                    </div>
+                                ))}
+                                {functionHelpGroupError()}
+                            </div>
                         </div>
                         {/*<div className='flex size'>*/}
                         {/*    <label className='label-needs'>*/}
