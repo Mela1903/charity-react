@@ -6,8 +6,6 @@ const DonationLocalization = ({ values, handleSelectChange, setIsNextAvailable, 
     const text = 'Jeśli wiesz komu chcesz pomóc, możesz wpisać nazwę tej organizacji w wyszukiwarce. Możesz też filtrować organizacje po ich lokalizacji bądź celu ich pomocy.'
 
 
-    const [localizationCity, setLocalizationCity] = useState(values.localization);
-
 
     const handleCityChange = (e) => {
         setLocalizationCity(e.target.value);
@@ -21,18 +19,18 @@ const DonationLocalization = ({ values, handleSelectChange, setIsNextAvailable, 
     const functionLocalizationError = () => {
         return (
             error && (
-                <span style={{color: 'red'}}>
-                    Wybierz miejscowość
-                </span>
+                <div className='error'>
+                    wybierz miejscowość
+                </div>
             )
         )
     }
     const functionLocalizationSpecificError = () => {
         return (
             errorSpecific && (
-                <span style={{color: 'red'}}>
+                <div className='error'>
                     wybierz, komu pomagasz
-                </span>
+                </div>
             )
         )
     }
@@ -40,9 +38,9 @@ const DonationLocalization = ({ values, handleSelectChange, setIsNextAvailable, 
     const functionHelpGroupError = () => {
         return (
             errorHelpGroup && (
-                <span style={{color: 'red'}}>
+                <div className='error'>
                     komu chcesz pomóc
-                </span>
+                </div>
             )
         )
     }
@@ -76,7 +74,18 @@ const DonationLocalization = ({ values, handleSelectChange, setIsNextAvailable, 
         }
     }
 
+    const [showItemList, setShowItemList] = useState(false);
+    const toggling = () => setShowItemList(!showItemList)
+    const [localizationCity, setLocalizationCity] = useState(values.localization);
+
     const cities = ['Poznań', 'Warszawa', 'Kraków', 'Wrocław', 'Katowice']
+
+    const onOptionClicked = value => (e) => {
+        setLocalizationCity(value);
+        setShowItemList(false);
+        handleSelectChange("localization", value, "localization");
+        console.log('selected city: ', localizationCity, ', ', e.target.value)
+    };
 
     const helpGroups = ['dzieciom', 'samotnym matkom', 'bezdomnym', 'niepełnosprawnym', 'osobom starszym']
 
@@ -85,16 +94,17 @@ const DonationLocalization = ({ values, handleSelectChange, setIsNextAvailable, 
     const [checkedItemsTest, setCheckedItemsTest] = useState(values.helpGroups);
 
     const handleCheckbox = (data) => {
-        console.log(data)
+        setCheckedItemsTest(!checkedItemsTest)
         const isChecked = checkedItemsTest.some(element => element === data)
         if (isChecked) {
             setCheckedItemsTest(
                 checkedItemsTest.filter(
                     (element) => element !== data
                 )
-            );
+            ); console.log('czy tak', isChecked)
         } else {
             setCheckedItemsTest(checkedItemsTest.concat(data));
+            console.log('czy tak', isChecked);
         }
     };
 
@@ -117,89 +127,73 @@ const DonationLocalization = ({ values, handleSelectChange, setIsNextAvailable, 
     }
 
     return (
+
         <div>
             <DonationHeaderAlert text={text}/>
             <div className='banner-form'>
                 <div className='banner-form_container'>
                     <span>Krok 3/4</span>
                     <h3 className='header3_text-donation-form'>Lokalizacja:</h3>
+
                     <form id='donation-form' className='donation-form' onSubmit={submitFormData}>
-                        <div className='donation-form__select-city'>
-                            <select
-                                name='localization'
-                                value={localizationCity}
-                                onChange={handleCityChange}
-                                defaultValue={values.localization}
-                                className='select'
-                            >
-                                <option value=''>- wybierz -</option>
-                                {cities.map((city, index) => (
-                                    <option
-                                        value={city}
-                                        key={index}>{city}
-                                    </option>
-                                ))}
-                            </select>
+
+                        {/*localization section*/}
+                        <div className='dropdown-container padding'>
+                            <div className={showItemList ? 'dropdown-header open' : 'dropdown-header'} onClick={toggling}>
+                                {localizationCity || '- wybierz -'}
+                            </div>
+                            {showItemList && (
+                                <div className='dropdown_list-container'>
+                                    <ul className='dropdown_list cities'>
+                                        <li className='list_item' value='Poznań' onClick={onOptionClicked('Poznań')}>Poznań</li>
+                                        <li className='list_item' value='Warszawa' onClick={onOptionClicked('Warszawa')}>Warszawa</li>
+                                        <li className='list_item' value='Kraków' onClick={onOptionClicked('Kraków')}>Kraków</li>
+                                        <li className='list_item' value='Wrocław' onClick={onOptionClicked('Wrocław')}>Wrocław</li>
+                                        <li className='list_item' value='Katowice' onClick={onOptionClicked('Katowice')}>Katowice</li>
+                                    </ul>
+                                </div>
+
+                                )}
                             {functionLocalizationError()}
                         </div>
 
                         {/*help Groups section*/}
-                        <div className='flex' style={{flexDirection: 'column'}}>
+                        <div className='position flex'>
                             <label className='label-needs'>
                                 Komu chcesz pomóc?
                                 {checkedItemsTest['dzieciom']}
                             </label>
-                            <div style={{flexDirection: 'row', width: 690}}>
+                            <div style={{flexDirection: 'row', width: 720}}>
                                 {helpGroups?.map((name, index) => (
-                                    <div className='checkbox-button flex' key={index}>
+                                    <div
+                                        className='checkbox-button flex'
+                                        key={index}
+                                    >
                                         <label>
-                                            <span>{name}</span>
                                             <input
                                                 value={name}
                                                 checked={checkedItemsTest.some(element => element === name)}
                                                 onClick={() => handleCheckbox(name)}
                                                 type='checkbox'
                                             />
+                                            <span>{name}</span>
                                         </label>
                                     </div>
                                 ))}
-                                {functionHelpGroupError()}
                             </div>
+                            {functionHelpGroupError()}
                         </div>
-                        {/*<div className='flex size'>*/}
-                        {/*    <label className='label-needs'>*/}
-                        {/*        Komu chcesz pomóc?*/}
-                        {/*        {checkedItems['dzieciom']}*/}
-                        {/*    </label>*/}
-                        {/*    {helpGroups.map(item => (*/}
-                        {/*        <>*/}
-                        {/*            <label*/}
-                        {/*                key={item.key}*/}
-                        {/*                className='flex'*/}
-                        {/*            >*/}
-                        {/*                {item.name}*/}
-                        {/*                <input*/}
-                        {/*                    name={item.name}*/}
-                        {/*                    checked={checkedItems[item.name]}*/}
-                        {/*                    onClick={handleChangeCheckbox}*/}
-                        {/*                    type='checkbox'*/}
-                        {/*                />*/}
-                        {/*            </label>*/}
-                        {/*        </>*/}
 
-                        {/*    ))}*/}
-
-                        {/*    {functionHelpGroupError()}*/}
-                        {/*</div>*/}
-
-
-                        <label className='label-needs'>Wpisz nazwę konkretnej organizacji (opcjonalnie)</label>
-                        <textarea
-                            onChange={handleNotesChange}
-                            value={note}
-                            name='localizationSpecific'
-                        />
-                        {functionLocalizationSpecificError()}
+                        <div className='flex position organization_name'>
+                            <label className='label-needs spacing50'>Wpisz nazwę konkretnej organizacji (opcjonalnie)</label>
+                            <textarea
+                                onChange={handleNotesChange}
+                                value={note}
+                                name='localizationSpecific'
+                                className='textarea'
+                            />
+                            {functionLocalizationSpecificError()}
+                        </div>
 
                         <div className='flex btn-donation-steps'>
                             <button className='btn btn__donation-form' onClick={prevStep}>

@@ -10,6 +10,10 @@
     height: 797px;
     padding: 36px 0 50px 142px;
 
+    &_summary {
+      height: 664px;
+    }
+
     span {
       font-size: 24px;
       color: $color-dark-grey;
@@ -57,10 +61,11 @@
   font-size: 24px;
   color: $color-black;
   font-weight: 300;
+  position: relative;
 
-  span {
+  .span {
     margin-right: 26px;
-
+    margin-top: 9px;
   }
 
   &__select {
@@ -74,14 +79,62 @@
 .address {
   flex-direction: column;
   padding-top: 50px;
-  justify-content: space-between;
+  color: $color-black;
+
   &_column {
     flex-direction: row;
   }
   &--text {
     flex-direction: column;
     margin-right: 152px;
+
+    span {
+      font-weight: 600;
+      color: $color-black;
+    }
   };
+}
+
+.padding20 {
+  padding-top: 20px;
+  align-items: center;
+
+  label {
+    width: 126px;
+
+    &.last {
+      align-self: baseline;
+    }
+  }
+
+  input {
+    width: 256px;
+    background-color: transparent;
+    border: 0.75px solid $color-dark-grey;
+    outline: none;
+    height: 40px;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active,
+  input:-webkit-autofill:valid,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus
+  {
+    -webkit-transition-delay: 99999s;
+  }
+
+  textarea {
+    height: 120px;
+    background-color: inherit;
+    outline: none;
+  }
 }
 .size {
   width: auto;
@@ -91,6 +144,10 @@
 .label-needs {
    font-size: 24px;
    font-weight: 600;
+
+  &.spacing50 {
+    letter-spacing: 0.5px;
+  }
  }
 
 .summary {
@@ -119,17 +176,14 @@
       display: block;
       font-size: 24px;
       color: $color-black;
+      background-color: inherit;
     }
 
     input[type='checkbox'] {
-      //position: absolute;
-      //top: -20px;
       display: none;
 
-      &:checked + span {
-        background-color: #911;
-        color: #fff;
-
+      &:checked + span{
+        background-color: $color-yellow;
       }
     }
   }
@@ -152,6 +206,10 @@
 .dropdown-container {
   width: 300px;
   display: inline-block;
+
+  &.padding {
+    padding-top: 20px;
+  }
 }
 
 .dropdown-header {
@@ -190,10 +248,14 @@
   flex-direction: row-reverse;
 };
 
+.bg {
+  background-color: $color-banner;
+}
+
 .dropdown_list {
   margin-top: 15px;
   text-align: center;
-  background: inherit;
+  background-color: inherit;
   border: 0.75px solid $color-dark-grey;
   box-sizing: border-box;
   color: $color-black;
@@ -201,6 +263,14 @@
   line-height: 33px;
   font-weight: 300;
   width: 86px;
+
+  &.cities {
+    width: 100%;
+    text-align: left;
+    padding-left: 18px;
+    background-color: $color-banner;
+    z-index: 1;
+  }
 
   &:first-child {
     padding-top: 6px;
@@ -215,3 +285,29 @@
   list-style: none;
   padding: 2px 0;
 };
+
+.position {
+  flex-direction: column;
+  position: absolute;
+  top: 119px;
+
+  &.organization_name {
+    top: 352px
+  }
+}
+
+.textarea {
+  width: 570px;
+  height: 40px;
+  margin-top: 20px;
+  border: 0.75px solid $color-dark-grey;
+  background-color: inherit;
+  resize: none;
+  outline: none;
+}
+
+.error {
+  color: red;
+  font-size: 16px;
+  padding-top: 5px;
+}

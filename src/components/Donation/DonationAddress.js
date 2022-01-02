@@ -1,10 +1,103 @@
-import React from 'react';
+import React, {useState} from 'react';
 import DonationHeaderAlert from "./DonationHeaderAlert";
 
 const DonationAddress = ({ values, handleChange, setIsNextAvailable, prevStep, nextStep }) => {
     setIsNextAvailable(false);
     const text = 'Podaj adres oraz termin odbioru rzeczy.'
 
+    const resetAddressErrors = () => {
+        return {
+            street: "",
+            city: "",
+            postCode: '',
+            phone: '',
+            date: '',
+            time: '',
+            notes: '',
+            lengthStreet: '',
+            lengthCity: ''
+        }
+    }
+
+    const [errors, setErrors] = useState(resetAddressErrors);
+
+    const isPostCodeValid = (postCode) => {
+        const regex = /^\d{2}[- ]?\d{3}$/;
+        return regex.test(postCode);
+    }
+
+    const isPhoneValid = (phone) => {
+        const regex = /^\d{9}$/;
+        return regex.test(phone);
+    }
+
+    const isEmpty = (data) => {
+        const regex = /^(\S+)$/;
+        return regex.test(data);
+    }
+
+    const validateAddressInputs = (street, city, postCode, phone, date, time) => {
+        street = values.street
+        city = values.city
+        postCode = values.postCode
+        phone = values.phone
+        date = values.date
+        time = values.time
+
+        let errorsTemp = {...errors};
+
+        if (isEmpty(street)) {
+            if (street.length > 0 && street.length < 3) {
+                errorsTemp.street = 'nazwa ulicy musi mieć conajmniej 4 znaki'
+            } else {
+                errorsTemp.street = '';
+            }
+        } else {
+            errorsTemp.street = 'nazwa ulicy nie może być pusta'
+        }
+
+        if (isEmpty(city)) {
+            if (city.length > 0 && city.length < 3) {
+                errorsTemp.city = 'nazwa miasta musi mieć conajmniej 4 znaki'
+            } else {
+                errorsTemp.city = '';
+            }
+        } else {
+            errorsTemp.city = 'nazwa miasta nie może być pusta'
+        }
+
+        errorsTemp.postCode = !isPostCodeValid(postCode) ? 'Podany kod pocztowy jest nieprawidłowy' : '';
+        errorsTemp.phone = !isPhoneValid(phone) ? 'Podany telefon jest nieprawidłowy' : '';
+        errorsTemp.date = date === '' ? 'wybierz datę odbioru' : '';
+        errorsTemp.time = time === '' ? 'podaj godzinę odbioru' : '';
+
+        setErrors({...errorsTemp});
+        return Object.values(errorsTemp).every(x => x === "");
+    }
+
+
+    const renderStreetError = () => errors.street && <p className='flex field-error'>{errors.street}</p>
+    const renderCityError = () => errors.city && <p className='field-error'>{errors.city}</p>
+    const renderPostCodeError = () => errors.postCode && <p className='field-error'>{errors.postCode}</p>
+    const renderPhoneError = () => errors.phone && <p className='field-error'>{errors.phone}</p>
+    const renderDateError = () => errors.date && <p className='field-error'>{errors.date}</p>
+    const renderTimeError = () => errors.time && <p className='field-error'>{errors.time}</p>
+
+    const submitFormData = (e) => {
+        e.preventDefault();
+
+        const street = values.street;
+        const city = values.city;
+        const postCode = values.postCode
+        const phone = values.phone
+        const date = values.date
+        const time = values.time
+
+        if (validateAddressInputs(street, city, postCode, phone, date, time)) {
+            // resetAddressErrors()
+            nextStep()
+        }
+    }
 
     return (
         <div>
@@ -14,19 +107,23 @@ const DonationAddress = ({ values, handleChange, setIsNextAvailable, prevStep, n
                     <div className='banner-form_container'>
                         <span>Krok 4/4</span>
                         <h3 className='header3_text-donation-form'>Podaj adres oraz termin odbioru rzeczy przez kuriera</h3>
-                        <form id='donation-form' className='donation-form'>
-                            <div className='flex address_column'>
-                                <div className='address--text'> Adres odbioru:
-                                    <div className='flex'>
+                        <form id='donation-form' className='donation-form' onSubmit={submitFormData}>
+                            <div className='flex address address_column'>
+                                <div className='address--text'>
+                                    <span>Adres odbioru:</span>
+
+                                    <div className='flex padding20'>
                                         <label>Ulica</label>
                                         <input
                                             type='text'
                                             name='street'
                                             defaultValue={values.street}
                                             onChange={handleChange('street')}
+                                            required
                                         />
+                                        {renderStreetError()}
                                     </div>
-                                    <div className='flex'>
+                                    <div className='flex padding20'>
                                         <label>Miasto</label>
                                         <input
                                             type='text'
@@ -34,8 +131,9 @@ const DonationAddress = ({ values, handleChange, setIsNextAvailable, prevStep, n
                                             defaultValue={values.city}
                                             onChange={handleChange('city')}
                                         />
+                                        {renderCityError()}
                                     </div>
-                                    <div className='flex'>
+                                    <div className='flex padding20'>
                                         <label>Kod pocztowy</label>
                                         <input
                                             type='text'
@@ -43,8 +141,9 @@ const DonationAddress = ({ values, handleChange, setIsNextAvailable, prevStep, n
                                             defaultValue={values.postCode}
                                             onChange={handleChange('postCode')}
                                         />
+                                        {renderPostCodeError()}
                                     </div>
-                                    <div className='flex'>
+                                    <div className='flex padding20'>
                                         <label>Numer telefonu</label>
                                         <input
                                             type='phone'
@@ -52,10 +151,13 @@ const DonationAddress = ({ values, handleChange, setIsNextAvailable, prevStep, n
                                             defaultValue={values.phone}
                                             onChange={handleChange('phone')}
                                         />
+                                        {renderPhoneError()}
                                     </div>
                                 </div>
-                                <div> Termin odbioru:
-                                    <div className='flex'>
+
+                                <div className='address--text'>
+                                    <span>Termin odbioru:</span>
+                                    <div className='flex padding20'>
                                         <label>Data</label>
                                         <input
                                             type='date'
@@ -63,20 +165,23 @@ const DonationAddress = ({ values, handleChange, setIsNextAvailable, prevStep, n
                                             defaultValue={values.date}
                                             onChange={handleChange('date')}
                                         />
+                                        {renderDateError()}
                                     </div>
-                                    <div className='flex'>
-                                        <label>Godzina</label>
-                                        <input
-                                            type='time'
-                                            name='time'
-                                            defaultValue={values.time}
-                                            onChange={handleChange('time')}
-                                        />
+                                    <div className='flex padding20'>
+                                        <div>
+                                            <label>Godzina</label>
+                                            <input
+                                                type='time'
+                                                name='time'
+                                                defaultValue={values.time}
+                                                onChange={handleChange('time')}
+                                            />
+                                        </div>
+                                        {renderTimeError()}
                                     </div>
-                                    <div className='flex'>
-                                        <label>Uwagi dla kuriera</label>
-                                        <input
-                                            type='textarea'
+                                    <div className='flex padding20 last'>
+                                        <label className='last'>Uwagi dla kuriera</label>
+                                        <textarea
                                             name='note'
                                             defaultValue={values.note}
                                             onChange={handleChange('note')}

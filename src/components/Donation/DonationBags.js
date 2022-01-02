@@ -3,7 +3,7 @@ import DonationHeaderAlert from "./DonationHeaderAlert";
 
 const DonationBags = ({ values, handleSelectChange, setIsNextAvailable, setFormInputName, prevStep, nextStep }) => {
     setIsNextAvailable(false);
-    setFormInputName("bags")
+    // setFormInputName("bags")
     const text = 'Wszystkie rzeczy do oddania zapakuj w 60l worki. Dokładną instrukcję jak poprawnie spakować rzeczy znajdziesz TUTAJ.'
 
 
@@ -12,9 +12,9 @@ const DonationBags = ({ values, handleSelectChange, setIsNextAvailable, setFormI
     const functionError = () => {
         return (
             error && (
-                <span style={{color: 'red'}}>
-                    Określ, ile worków chcesz przekazać
-                </span>
+                <div className='error'>
+                    określ, ile worków chcesz przekazać
+                </div>
             )
         )
     }
@@ -35,8 +35,8 @@ const DonationBags = ({ values, handleSelectChange, setIsNextAvailable, setFormI
     const onOptionClicked = value => (e) => {
         setBagsNumber(value);
         setShowItemList(false);
-        handleSelectChange("bags", e.target.value, e.target.name);
-        console.log('selected:', bagsNumber);
+        handleSelectChange("bags", value, 'bags');
+        console.log('selected:', bagsNumber, ', ', e.target.value, ', ', e.target.name);
     };
 
     return (
@@ -49,26 +49,33 @@ const DonationBags = ({ values, handleSelectChange, setIsNextAvailable, setFormI
 
                 <form id='donation-form' className='donation-form' onSubmit={submitFormData}>
                     <div className='donation-form__select flex'>
-                        <span style={{marginTop: '9px'}}>Liczba 60l worków:</span>
-                        <div className='dropdown-container'>
-                            <div className={showItemList ? 'dropdown-header open' : 'dropdown-header'} onClick={toggling}>
-                                {bagsNumber || '- wybierz -'}
-                            </div>
-                            {showItemList && (
-                                <div className='dropdown_list-container'>
-                                    <ul className='dropdown_list'>
-                                        <li className='list_item' value='1' onClick={onOptionClicked(1)}>1</li>
-                                        <li className='list_item' value='2' onClick={onOptionClicked(2)}>2</li>
-                                        <li className='list_item' value='3' onClick={onOptionClicked(3)}>3</li>
-                                        <li className='list_item' value='4' onClick={onOptionClicked(4)}>4</li>
-                                        <li className='list_item' value='5' onClick={onOptionClicked(5)}>5</li>
-                                    </ul>
+                        <div>
+                            <div className='flex'>
+                                <span className='span'>Liczba 60l worków:</span>
+                                <div className='dropdown-container'>
+                                    <div className={showItemList ? 'dropdown-header open' : 'dropdown-header'}
+                                         onClick={toggling}>
+                                        {bagsNumber || '- wybierz -'}
+                                    </div>
+                                    {showItemList && (
+                                        <div className='dropdown_list-container'>
+                                            <ul className='dropdown_list'>
+                                                <li className='list_item' value='1' onClick={onOptionClicked(1)}>1</li>
+                                                <li className='list_item' value='2' onClick={onOptionClicked(2)}>2</li>
+                                                <li className='list_item' value='3' onClick={onOptionClicked(3)}>3</li>
+                                                <li className='list_item' value='4' onClick={onOptionClicked(4)}>4</li>
+                                                <li className='list_item' value='5' onClick={onOptionClicked(5)}>5</li>
+                                            </ul>
+                                        </div>
+                                    )}
                                 </div>
-                            )}
-                        </div>
-                        {functionError()}
+                            </div>
 
+
+                            <div>{functionError()}</div>
+                        </div>
                     </div>
+
                     <div className='flex btn-donation-steps'>
                         <button className='btn btn__donation-form' onClick={prevStep}>
                             Wstecz

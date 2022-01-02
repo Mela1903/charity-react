@@ -25,9 +25,9 @@ const DonationType = ({ values, handleSelectChange, setFormInputName, nextStep }
     const functionError = () => {
         return (
             error && (
-                <span style={{color: 'red'}}>
+                <div className='error'>
                     Wybierz rodzaj darowizny
-                </span>
+                </div>
             )
         )
     }

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import firebase from "../../firebase";
 
-const DonationSummary = ({ values }) => {
+const DonationSummary = ({ values, prevStep, nextStep }) => {
     const checked = values.helpGroups;
 
     useEffect(() => {
@@ -26,17 +26,29 @@ const DonationSummary = ({ values }) => {
     }, [])
 
     const checkedArray = () => {
-        let helpGrp = ''
-        for (let key in checked) {
-            if (checked.hasOwnProperty(key))
-                helpGrp = helpGrp + key + ', '
-        }
-        return helpGrp.slice(0, helpGrp.length -2);
+        // const checked = values.helpGroups
+        // let helpGrp = ''
+        // for (let i = 0; i < checked.length; i++) {
+        //    if (checked[i] !== null) {
+        //        helpGrp = checked + ', ';
+        //    }
+        // } return helpGrp.slice(0, helpGrp.length - 2);
+        return checked.join(', ');
     }
+
+    // const checkedArray = () => {
+    //     let helpGrp = ''
+    //     for (let key in checked) {
+    //         if (checked.hasOwnProperty(key))
+    //             helpGrp = helpGrp + key + ', '
+    //         console.log(helpGrp);
+    //     }
+    //     return helpGrp.slice(0, helpGrp.length - 2);
+    // }
 
     return (
             <div className='banner-form'>
-                <div className='banner-form_container'>
+                <div className='banner-form_container banner-form_container_summary'>
                     <h3 className='header3_text-donation-form'>Podsumowanie Twojej darowizny</h3>
                     <div style={{paddingTop: 45}}>
                         Oddajesz:
@@ -91,6 +103,14 @@ const DonationSummary = ({ values }) => {
                         </div>
                     </div>
 
+                </div>
+                <div className='flex btn-donation-steps' style={{marginLeft: 142}}>
+                    <button className='btn btn__donation-form' onClick={prevStep}>
+                        Wstecz
+                    </button>
+                    <button className='btn btn__donation-form complete' type='submit' onClick={nextStep}>
+                        Potwierdzam
+                    </button>
                 </div>
         </div>
     );

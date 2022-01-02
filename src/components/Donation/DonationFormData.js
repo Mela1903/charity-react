@@ -25,7 +25,7 @@ const DonationFormData = () => {
     })
 
     const [isNextAvailable, setIsNextAvailable] = useState(false);
-    console.log(isNextAvailable)
+    // console.log(isNextAvailable)
 
     const nextStep = () => {
         setActiveStep(activeStep + 1);
@@ -35,20 +35,20 @@ const DonationFormData = () => {
         setActiveStep(activeStep - 1);
     }
 
-    const handleNextStep = (attribute) => {
-        console.log(attribute, multiFormValues[attribute])
-        if (multiFormValues[attribute] !== '') {
-            setIsNextAvailable(true);
-            setActiveStep((nextStep) => nextStep + 1);
+    // const handleNextStep = (attribute) => {
+    //     console.log(attribute, multiFormValues[attribute])
+    //     if (multiFormValues[attribute] !== '') {
+    //         setIsNextAvailable(true);
+    //         setActiveStep((nextStep) => nextStep + 1);
+    //
+    //     } else {
+    //         setIsNextAvailable(false)
+    //     }
+    // }
 
-        } else {
-            setIsNextAvailable(false)
-        }
-    }
-
-    const handlePreviousStep = () => {
-        setActiveStep((previousStep) => previousStep - 1)
-    }
+    // const handlePreviousStep = () => {
+    //     setActiveStep((previousStep) => previousStep - 1)
+    // }
 
     const handleChange = (input) => (e) => {
         setFormInputName(e.target.name);
@@ -118,7 +118,7 @@ const DonationFormData = () => {
                 )
             case 5:
                 return (
-                    <DonationSummary values={multiFormValues}/>
+                    <DonationSummary values={multiFormValues} nextStep={nextStep} prevStep={prevStep}/>
                 )
             case 6:
                 return (
