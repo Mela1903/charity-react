@@ -148,7 +148,7 @@ const DonationAddress = ({ values, handleChange, setIsNextAvailable, prevStep, n
                                         />
                                     </div>
                                     {renderPostCodeError()}
-                                    <div className='flex' style={{marginRight: 270}}>
+                                    <div className='flex padding20'>
                                         <label>Numer telefonu</label>
                                         <input
                                             type='phone'

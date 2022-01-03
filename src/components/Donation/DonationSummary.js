@@ -25,26 +25,17 @@ const DonationSummary = ({ values, prevStep, nextStep }) => {
         )
     }, [])
 
-    const checkedArray = () => {
-        // const checked = values.helpGroups
-        // let helpGrp = ''
-        // for (let i = 0; i < checked.length; i++) {
-        //    if (checked[i] !== null) {
-        //        helpGrp = checked + ', ';
-        //    }
-        // } return helpGrp.slice(0, helpGrp.length - 2);
-        return checked.join(', ');
+    const checkedTypes = () => {
+        if (values.bags === 1) {
+            return 'worek'
+        } else {
+            return 'worki'
+        }
     }
 
-    // const checkedArray = () => {
-    //     let helpGrp = ''
-    //     for (let key in checked) {
-    //         if (checked.hasOwnProperty(key))
-    //             helpGrp = helpGrp + key + ', '
-    //         console.log(helpGrp);
-    //     }
-    //     return helpGrp.slice(0, helpGrp.length - 2);
-    // }
+    const checkedArray = () => {
+        return checked.join(', ');
+    }
 
     return (
             <div className='banner-form'>
@@ -55,7 +46,7 @@ const DonationSummary = ({ values, prevStep, nextStep }) => {
                         <div className='flex summary'>
                             <div className='flex' style={{alignItems: 'center'}}>
                                 <img src={require('../../assets/Icon-1.svg').default} alt='Icon T-Shirt'/>
-                                {values.bags} worki, {' '}
+                                {values.bags} {checkedTypes()}, {' '}
                                 {values.type}, {' '}
                                 {checkedArray()}
                             </div>
@@ -67,7 +58,7 @@ const DonationSummary = ({ values, prevStep, nextStep }) => {
                     </div>
 
                     <div className='flex' style={{paddingTop: 50}}>
-                        <div className='flex' style={{paddingRight: 270, flexDirection: 'column'}}>
+                        <div className='flex' style={{paddingRight: 142, flexDirection: 'column'}}>
                             Adres odbioru:
                             <div className='flex' style={{paddingTop: 10}}>
                                 <span style={{paddingRight: 20, width: 100}}>Ulica</span>
@@ -98,7 +89,7 @@ const DonationSummary = ({ values, prevStep, nextStep }) => {
                             </div>
                             <div className='flex' style={{paddingTop: 10}}>
                                 <span style={{paddingRight: 20, width: 100}}>Uwagi dla kuriera</span>
-                                <span>{values.note}</span>
+                                <span style={{overflowWrap: 'break-word'}}>{values.note}</span>
                             </div>
                         </div>
                     </div>

@@ -163,7 +163,7 @@ const DonationLocalization = ({ values, handleSelectChange, setIsNextAvailable, 
                                 Komu chcesz pomóc?
                                 {checkedItemsTest['dzieciom']}
                             </label>
-                            <div style={{flexDirection: 'row', width: 720}}>
+                            <div style={{flexDirection: 'row', width: 840}}>
                                 {helpGroups?.map((name, index) => (
                                     <div
                                         className='checkbox-button flex'
