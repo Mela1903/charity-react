@@ -1,15 +1,14 @@
 import React, {useState} from 'react';
 import DonationHeaderAlert from "./DonationHeaderAlert";
 
-const DonationType = ({ values, handleSelectChange, setFormInputName, nextStep }) => {
+const DonationType = ({values, handleSelectChange, nextStep}) => {
     const text = 'Uzupełnij szczegóły dotyczące Twoich rzeczy. Dzięki temu będziemy wiedzieć komu najlepiej je przekazać.'
-    setFormInputName("type")
 
     const [selectedType, setSelectedType] = useState(values.type);
 
     const typesList = [
         ['clothesReuse', 'ubrania, które nadają się do ponownego użycia'],
-        ['clothesOut', 'ubrania, do wyrzucenia'],
+        ['clothesOut', 'ubrania do wyrzucenia'],
         ['toys', 'zabawki'],
         ['books', 'książki'],
         ['other', 'Inne']
@@ -50,23 +49,21 @@ const DonationType = ({ values, handleSelectChange, setFormInputName, nextStep }
                     <h3 className='header3_text-donation-form'>Zaznacz co chcesz oddać:</h3>
                     <form id='donation-form' className='donation-form' onSubmit={submitFormData}>
                         <div>
-                            {typesList.map(([value, text], i) => (
-                                 <>
-                                     <label className='type' key={ i }>
-                                     <input
-                                         type='radio'
-                                         value={ text }
-                                         name='type'
-                                         onChange={handleTypeChange}
-                                         defaultValue={values.type}
-                                         checked={selectedType === text}
-                                     />
-                                     { text }
+                            {typesList.map(([value, text]) => (
+                                <div key={value}>
+                                    <label className='type'>
+                                        <input
+                                            type='radio'
+                                            value={text}
+                                            name='type'
+                                            onChange={handleTypeChange}
+                                            checked={selectedType === text}
+                                        />
+                                        {text}
 
-                                     <span className='checkmark'/>
-
-                                 </label>
-                                 </>
+                                        <span className='checkmark'/>
+                                    </label>
+                                </div>
 
                             ))}
 

@@ -2,8 +2,7 @@ import React, {useState} from 'react';
 import DonationHeaderAlert from "./DonationHeaderAlert";
 
 
-const DonationAddress = ({ values, handleChange, setIsNextAvailable, prevStep, nextStep }) => {
-    setIsNextAvailable(false);
+const DonationAddress = ({values, handleChange, prevStep, nextStep}) => {
     const text = 'Podaj adres oraz termin odbioru rzeczy.'
 
     const resetAddressErrors = () => {
@@ -95,15 +94,15 @@ const DonationAddress = ({ values, handleChange, setIsNextAvailable, prevStep, n
         const time = values.time
 
         if (validateAddressInputs(street, city, postCode, phone, date, time)) {
-            // resetAddressErrors()
             nextStep()
         }
     }
-    const today = new Date();
-    console.log(today)
-    const day = new Date().getDate()
-    const month = new Date().getMonth()
+
+    const day = new Date().getDate() + 1;
+    const month = new Date().getMonth() + 1;
     const year = new Date().getFullYear()
+    const correctMonth = month < 10 ? '0' + month : month
+    const tomorrow = year + '-' + correctMonth + '-' + day;
 
     return (
         <div>
@@ -112,7 +111,8 @@ const DonationAddress = ({ values, handleChange, setIsNextAvailable, prevStep, n
                 <div className='banner-form'>
                     <div className='banner-form_container'>
                         <span>Krok 4/4</span>
-                        <h3 className='header3_text-donation-form'>Podaj adres oraz termin odbioru rzeczy przez kuriera</h3>
+                        <h3 className='header3_text-donation-form'>Podaj adres oraz termin odbioru rzeczy przez
+                            kuriera</h3>
                         <form id='donation-form' className='donation-form' onSubmit={submitFormData}>
                             <div className='flex address address_column'>
                                 <div className='address--text'>
@@ -169,7 +169,7 @@ const DonationAddress = ({ values, handleChange, setIsNextAvailable, prevStep, n
                                             name='date'
                                             defaultValue={values.date}
                                             onChange={handleChange('date')}
-                                            min={new Date().getDate()}
+                                            min={tomorrow}
                                         />
 
                                     </div>

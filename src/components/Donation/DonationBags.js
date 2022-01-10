@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 import DonationHeaderAlert from "./DonationHeaderAlert";
 
-const DonationBags = ({ values, handleSelectChange, setIsNextAvailable, setFormInputName, prevStep, nextStep }) => {
-    setIsNextAvailable(false);
-    // setFormInputName("bags")
+const DonationBags = ({values, handleSelectChange, prevStep, nextStep}) => {
     const text = 'Wszystkie rzeczy do oddania zapakuj w 60l worki. Dokładną instrukcję jak poprawnie spakować rzeczy znajdziesz TUTAJ.'
 
 
@@ -12,7 +10,7 @@ const DonationBags = ({ values, handleSelectChange, setIsNextAvailable, setFormI
     const functionError = () => {
         return (
             error && (
-                <div className='error'>
+                <div className='error error-bags'>
                     określ, ile worków chcesz przekazać
                 </div>
             )
@@ -36,7 +34,6 @@ const DonationBags = ({ values, handleSelectChange, setIsNextAvailable, setFormI
         setBagsNumber(value);
         setShowItemList(false);
         handleSelectChange("bags", value, 'bags');
-        console.log('selected:', bagsNumber, ', ', e.target.value, ', ', e.target.name);
     };
 
     return (
@@ -49,7 +46,7 @@ const DonationBags = ({ values, handleSelectChange, setIsNextAvailable, setFormI
 
                 <form id='donation-form' className='donation-form' onSubmit={submitFormData}>
                     <div className='donation-form__select flex'>
-                        <div>
+                        <div className='relative'>
                             <div className='flex'>
                                 <span className='span'>Liczba 60l worków:</span>
                                 <div className='dropdown-container'>
@@ -72,7 +69,7 @@ const DonationBags = ({ values, handleSelectChange, setIsNextAvailable, setFormI
                             </div>
 
 
-                            <div>{functionError()}</div>
+                            {functionError()}
                         </div>
                     </div>
 

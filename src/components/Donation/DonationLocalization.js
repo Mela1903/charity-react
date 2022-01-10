@@ -1,16 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import DonationHeaderAlert from "./DonationHeaderAlert";
 
-const DonationLocalization = ({ values, handleSelectChange, setIsNextAvailable, prevStep, nextStep }) => {
-    setIsNextAvailable(false);
+const DonationLocalization = ({values, handleSelectChange, prevStep, nextStep}) => {
     const text = 'Jeśli wiesz komu chcesz pomóc, możesz wpisać nazwę tej organizacji w wyszukiwarce. Możesz też filtrować organizacje po ich lokalizacji bądź celu ich pomocy.'
-
-
-
-    const handleCityChange = (e) => {
-        setLocalizationCity(e.target.value);
-        handleSelectChange("localization", e.target.value, "localization");
-    }
 
     const [error, setError] = useState(false)
     const [errorHelpGroup, setErrorHelpGroup] = useState(false)
@@ -78,46 +70,34 @@ const DonationLocalization = ({ values, handleSelectChange, setIsNextAvailable, 
     const toggling = () => setShowItemList(!showItemList)
     const [localizationCity, setLocalizationCity] = useState(values.localization);
 
-    const cities = ['Poznań', 'Warszawa', 'Kraków', 'Wrocław', 'Katowice']
-
     const onOptionClicked = value => (e) => {
         setLocalizationCity(value);
         setShowItemList(false);
         handleSelectChange("localization", value, "localization");
-        console.log('selected city: ', localizationCity, ', ', e.target.value)
     };
 
     const helpGroups = ['dzieciom', 'samotnym matkom', 'bezdomnym', 'niepełnosprawnym', 'osobom starszym']
 
-    const [checkedItems, setCheckedItems] = useState(values.helpGroups)
-
-    const [checkedItemsTest, setCheckedItemsTest] = useState(values.helpGroups);
+    const [checkedItems, setCheckedItems] = useState(values.helpGroups);
 
     const handleCheckbox = (data) => {
-        setCheckedItemsTest(!checkedItemsTest)
-        const isChecked = checkedItemsTest.some(element => element === data)
+        setCheckedItems(!checkedItems)
+        const isChecked = checkedItems.some(element => element === data)
         if (isChecked) {
-            setCheckedItemsTest(
-                checkedItemsTest.filter(
+            setCheckedItems(
+                checkedItems.filter(
                     (element) => element !== data
                 )
-            ); console.log('czy tak', isChecked)
+            );
         } else {
-            setCheckedItemsTest(checkedItemsTest.concat(data));
-            console.log('czy tak', isChecked);
+            setCheckedItems(checkedItems.concat(data));
         }
     };
 
-    const handleChangeCheckbox = (e) => {
-        setCheckedItems({
-            ...checkedItems,
-            [e.target.name] : e.target.checked
-        });
-    }
 
     useEffect(() => {
-        handleSelectChange("helpGroups", checkedItemsTest, "helpGroups")
-    }, [checkedItemsTest]);
+        handleSelectChange("helpGroups", checkedItems, "helpGroups")
+    }, [checkedItems]);
 
     const [note, setNote] = useState(values.localizationSpecific)
 
@@ -161,7 +141,7 @@ const DonationLocalization = ({ values, handleSelectChange, setIsNextAvailable, 
                         <div className='position flex'>
                             <label className='label-needs'>
                                 Komu chcesz pomóc?
-                                {checkedItemsTest['dzieciom']}
+                                {checkedItems['dzieciom']}
                             </label>
                             <div style={{flexDirection: 'row', width: 840}}>
                                 {helpGroups?.map((name, index) => (
@@ -172,8 +152,8 @@ const DonationLocalization = ({ values, handleSelectChange, setIsNextAvailable, 
                                         <label>
                                             <input
                                                 value={name}
-                                                checked={checkedItemsTest.some(element => element === name)}
-                                                onClick={() => handleCheckbox(name)}
+                                                checked={checkedItems.some(element => element === name)}
+                                                onChange={() => handleCheckbox(name)}
                                                 type='checkbox'
                                             />
                                             <span>{name}</span>
