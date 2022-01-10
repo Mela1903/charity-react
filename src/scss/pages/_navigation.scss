@@ -9,6 +9,11 @@ ul {
   justify-content: flex-end;
   padding-top: 37px;
   margin-right: -10px;
+  align-items: center;
+
+  span {
+    font-size: 13px;
+  }
 
   a {
     color: $color-grey;

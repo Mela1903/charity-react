@@ -51,12 +51,15 @@
     height: 79px;
     font-size: 24px;
     margin-right: 50px;
+
+    &.complete {
+      width: 244px;
+    }
   }
 }
 
 .btn-donation-steps {
-  position: relative;
-  top: -129px;
-  left: 141px;
   margin-right: 282px;
+
+
 }

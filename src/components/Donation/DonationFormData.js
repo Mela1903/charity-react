@@ -8,12 +8,11 @@ import DonationConfirmation from "./DonationConfirmation";
 
 const DonationFormData = () => {
     const [activeStep, setActiveStep] = useState(1)
-
     const [multiFormValues, setMultiFormValues] = useState({
         type: '',
         bags: "",
         localization: '',
-        helpGroups: '',
+        helpGroups: [],
         localizationSpecific: '',
         street: '',
         city: '',
@@ -24,64 +23,52 @@ const DonationFormData = () => {
         note: ''
     })
 
-    const toggleType = (updatedType) => {
-        setMultiFormValues(prevState => prevState.type = updatedType)
+    const nextStep = () => {
+        setActiveStep(activeStep + 1);
     }
 
-    const handleNextStep = () => {
-        setActiveStep((nextStep) => nextStep + 1)
-    }
-
-    const handlePreviousStep = () => {
-        setActiveStep((previousStep) => previousStep - 1)
+    const prevStep = () => {
+        setActiveStep(activeStep - 1);
     }
 
     const handleChange = (input) => (e) => {
-        setMultiFormValues({...multiFormValues, [input]: e.target.value})
+        setMultiFormValues({...multiFormValues, [input]: e.target.value});
     }
 
     const handleSelectChange = (input, number) => {
-        setMultiFormValues({...multiFormValues, [input]: number})
+        setMultiFormValues({...multiFormValues, [input]: number});
     }
 
-    return (
-        <div>
-            {activeStep === 1 && (
-                <DonationType values={multiFormValues} handleSelectChange={handleSelectChange} />
-            )}
-            {activeStep === 2 && (
-                <DonationBags values={multiFormValues} handleSelectChange={handleSelectChange}/>
-            )}
-            {activeStep === 3 && (
-                <DonationLocalization values={multiFormValues} handleSelectChange={handleSelectChange} />
-            )}
-            {activeStep === 4 && (
-                <DonationAddress values={multiFormValues} handleChange={handleChange} />
-            )}
-            {activeStep === 5 && (
-                <DonationSummary values={multiFormValues}/>
-            )}
-            {activeStep === 6 && (
-                <DonationConfirmation />
-            )}
-            <div className='flex btn-donation-steps'>
-                <button
-                    className='btn btn__donation-form'
-                    hidden={activeStep === 1 || activeStep === 6}
-                    onClick={handlePreviousStep}
-                >
-                    Wstecz</button>
-                <button
-                    className='btn btn__donation-form'
-                    onClick={handleNextStep}
-                    hidden={activeStep === 6}
-                >
-                    {activeStep === 5 ? 'Potwierdzam' : 'Dalej'}
-                    </button>
-            </div>
+        switch (activeStep) {
+            case 1:
+                return (
+                    <DonationType values={multiFormValues} nextStep={nextStep} handleSelectChange={handleSelectChange}/>
+                )
+            case 2:
+                return (
+                    <DonationBags values={multiFormValues} nextStep={nextStep} prevStep={prevStep}
+                                  handleSelectChange={handleSelectChange}/>
+                )
+            case 3:
+                return (
+                    <DonationLocalization values={multiFormValues} nextStep={nextStep} prevStep={prevStep}
+                                          handleSelectChange={handleSelectChange}/>
+                )
+            case 4:
+                return (
+                    <DonationAddress values={multiFormValues} nextStep={nextStep} prevStep={prevStep}
+                                     handleChange={handleChange}/>
+                )
+            case 5:
+                return (
+                    <DonationSummary values={multiFormValues} nextStep={nextStep} prevStep={prevStep}/>
+                )
+            case 6:
+                return (
+                    <DonationConfirmation values={multiFormValues}/>
+                )
+        }
 
-        </div>
-    );
 };
 
 export default DonationFormData;

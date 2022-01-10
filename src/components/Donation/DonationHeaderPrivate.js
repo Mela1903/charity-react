@@ -14,25 +14,25 @@ const DonationHeaderPrivate = () => {
                 <ul>
                     <li>
                         <div className='elements-text'>
-                            <text>1</text>
+                            <div className='text'>1</div>
                             <span>Wybierz rzeczy</span>
                         </div>
                     </li>
                     <li>
                         <div className='elements-text'>
-                            <text>2</text>
+                            <div className='text'>2</div>
                             <span>Spakuj je w worki</span>
                         </div>
                     </li>
                     <li>
                         <div className='elements-text'>
-                            <text>3</text>
+                            <div className='text'>3</div>
                             <span>Wybierz fundację</span>
                         </div>
                     </li>
                     <li>
                         <div className='elements-text'>
-                            <text>4</text>
+                            <div className='text'>4</div>
                             <span>Zamów kuriera</span>
                         </div>
                     </li>

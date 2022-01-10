@@ -19,7 +19,7 @@ const HomeNavigationUser = () => {
 
     return (
         <ul className="page-nav-actions">
-            <text>Cześć {currentUser.email}!</text>
+            <span>Cześć {currentUser.email}!</span>
             <li><a href="/oddaj-rzeczy" className="nav__link">Oddaj rzeczy</a></li>
             <li><a href="/wylogowano" className="nav__link" onClick={handleLogout}>Wyloguj</a></li>
         </ul>
