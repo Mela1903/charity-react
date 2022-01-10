@@ -1,6 +1,27 @@
-# Getting Started with Create React App
+# Charity Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Web app to collect different products for charity donations. Built with React, Saas and Firebase from scratch, using
+existing mock-ups on Adobe XD.
+
+The donations are only available after user registration. The user authentication have been constructed with Firebase.
+
+This project consist on a one-page website and a donation system, which is only available after user registration.
+Functionalities and characteristics:
+
+* Authentication and database storage with Firebase
+* Components styled with Sass
+* Dynamic data rendered from Firebase for institutions
+* Slider with pagination for institutions list
+* Public and private routing with React Router
+* Multistep donation form with validation and data storage using React Hooks
+* Context from React to store authenticated users
+* Login and logout
+* User registration with input validation
+* Fetching data from database in real time
+
+## Technologies and tools:
+
+Tools and Technologies used: Webstorm, GitHub, Sass, React, React Router, Firebase, Firestore
 
 ## Available Scripts
 
