@@ -56,7 +56,7 @@ const DonationSummary = ({ values, prevStep, nextStep }) => {
                         </div>
                         <div className='flex align-center'>
                             <img src={require('../../assets/Icon-4.svg').default} alt='Icon T-Shirt'/>
-                            dla lokalizacji: {values.localization}
+                            {values.localization.length > 0 ? `dla lokalizacji: ${values.localization}` : `dla organizacji: ${values.localizationSpecific}`}
                         </div>
                     </div>
                 </div>
